@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './components/Login.jsx';
-import Page404 from './components/Page404.jsx';
-import Chat from './components/Chat.jsx';
+import Login from './pages/Login.jsx';
+import NotFound from './pages/NotFound.jsx';
+import Chat from './pages/Chat.jsx';
 import { useSelector } from 'react-redux';
 import { selectCurrentToken } from './slices/authSlice.js';
 
@@ -12,7 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={isAuth ? <Chat /> : <Navigate to="/login" />} />
         <Route path="login" element={isAuth ? <Navigate to="/" /> : <Login />} />
-        <Route path="*" element={<Page404 />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
