@@ -1,5 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap';
-import Header from './Header.jsx';
+import Header from '../components/Header.jsx';
 
 const MainLayout = ({ children }) => {
   return (

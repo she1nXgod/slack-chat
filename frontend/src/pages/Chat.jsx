@@ -1,4 +1,5 @@
-import { ChatInterface, MainLayout } from '../components';
+import MainLayout from '../layouts/MainLayout.jsx';
+import { ChatInterface } from '../components';
 
 const Chat = () => {
   return (
