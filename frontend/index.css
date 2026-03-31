@@ -1,3 +1,15 @@
 button:disabled {
   opacity: 0.5;
 }
+
+.h-95 {
+  height: 95% !important;
+}
+
+.btn-channels {
+  border: none;
+}
+
+.btn-channels:hover {
+  background: rgb(211, 212, 213);
+}
