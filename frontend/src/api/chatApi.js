@@ -15,15 +15,19 @@ export const chatApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Message'],
+  tagTypes: ['Messages', 'Channels'],
   endpoints: (builder) => ({
     getMessages: builder.query({
       query: () => 'messages',
-      providesTags: ['Message'],
+      providesTags: ['Messages'],
+    }),
+    getChannels: builder.query({
+      query: () => 'channels',
+      providesTags: ['Channels'],
     }),
   }),
 });
 
-const { useGetMessagesQuery } = chatApi;
+const { useGetMessagesQuery, useGetChannelsQuery } = chatApi;
 
-export { useGetMessagesQuery as getMessages };
+export { useGetMessagesQuery as getMessages, useGetChannelsQuery as getChannels };
