@@ -5,3 +5,4 @@ export { default as ChatInterface } from './ChatInterface.jsx';
 export { default as ChannelListHeader } from './ChannelListHeader.jsx';
 export { default as Channels } from './Channels.jsx';
 export { default as Channel } from './Channel.jsx';
+export { default as LoadingSpinner } from './LoadingSpinner.jsx';

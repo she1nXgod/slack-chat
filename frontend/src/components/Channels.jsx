@@ -1,12 +1,16 @@
-import { Row, Spinner } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { getChannels } from '../api/chatApi.js';
-import { Channel } from './';
+import { Channel, LoadingSpinner } from './';
 
 const Channels = () => {
-  const { data: channels, isLoading } = getChannels();
+  const { data: channels, isLoading, error } = getChannels();
 
   if (isLoading) {
-    return <Spinner />;
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <h1>Error</h1>;
   }
 
   return (
