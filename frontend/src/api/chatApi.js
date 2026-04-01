@@ -25,9 +25,28 @@ export const chatApi = createApi({
       query: () => 'channels',
       providesTags: ['Channels'],
     }),
+    sendMessage: builder.mutation({
+      query: (newMessage) => ({
+        url: 'messages',
+        body: newMessage,
+        method: 'POST',
+      }),
+    }),
+    removeMessage: builder.mutation({
+      query: (id) => ({
+        url: `messages/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
-const { useGetMessagesQuery, useGetChannelsQuery } = chatApi;
+const { useGetMessagesQuery, useGetChannelsQuery, useSendMessageMutation, useRemoveMessageMutation } =
+  chatApi;
 
-export { useGetMessagesQuery as getMessages, useGetChannelsQuery as getChannels };
+export {
+  useGetMessagesQuery as getMessages,
+  useGetChannelsQuery as getChannels,
+  useSendMessageMutation as sendMessage,
+  useRemoveMessageMutation as removeMessage,
+};

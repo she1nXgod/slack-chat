@@ -1,6 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap';
-import { Channels, ChannelListHeader } from './';
-import ChatMessages from './ChatMessages';
+import { Channels, ChannelListHeader, ChannelChat } from './';
 
 const ChatInterface = () => {
   return (
@@ -10,8 +9,9 @@ const ChatInterface = () => {
           <ChannelListHeader />
           <Channels />
         </Col>
-        <Col xs={9} className="p-3">
-          <ChatMessages />
+
+        <Col xs={9} className="p-0">
+          <ChannelChat />
         </Col>
       </Row>
     </Container>
