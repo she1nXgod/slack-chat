@@ -7,3 +7,6 @@ export { default as Channels } from './Channels.jsx';
 export { default as Channel } from './Channel.jsx';
 export { default as LoadingSpinner } from './LoadingSpinner.jsx';
 export { default as ErrorMessage } from './ErrorMessage.jsx';
+export { default as ChatMessages } from './ChatMessages.jsx';
+export { default as ChannelChat } from './ChannelChat.jsx';
+export { default as Message } from './Message.jsx';
