@@ -2,7 +2,7 @@ import { Row, Col, Button } from 'react-bootstrap';
 
 const ChannelListHeader = () => {
   return (
-    <Row className="border-bottom border-secondary-subtle">
+    <Row className="border-bottom border-secondary-subtle w-100 m-0">
       <Col className="d-flex align-items-center">
         <span className="fw-bold">Channels</span>
       </Col>

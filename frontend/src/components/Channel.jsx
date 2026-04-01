@@ -1,5 +1,11 @@
+import { Nav, Button } from 'react-bootstrap';
+
 const Channel = ({ name }) => {
-  return <button className="p-2 text-start btn-channels">{`# ${name}`}</button>;
+  return (
+    <Nav.Item className="w-100">
+      <Button variant="light" className="w-100 rounded-0 text-start">{`# ${name}`}</Button>
+    </Nav.Item>
+  );
 };
 
 export default Channel;

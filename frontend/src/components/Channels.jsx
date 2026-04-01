@@ -1,4 +1,4 @@
-import { Row } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import { getChannels } from '../api/chatApi.js';
 import { Channel, ErrorMessage, LoadingSpinner } from './';
 
@@ -15,13 +15,11 @@ const Channels = () => {
   }
 
   return (
-    <>
+    <Nav className="w-100 m-0">
       {channels.map(({ id, name, removable }) => (
-        <Row key={id}>
-          <Channel name={name} removable={removable} />
-        </Row>
+        <Channel key={id} name={name} removable={removable} />
       ))}
-    </>
+    </Nav>
   );
 };
 
