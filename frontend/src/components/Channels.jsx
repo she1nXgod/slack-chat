@@ -1,16 +1,17 @@
 import { Row } from 'react-bootstrap';
 import { getChannels } from '../api/chatApi.js';
-import { Channel, LoadingSpinner } from './';
+import { Channel, ErrorMessage, LoadingSpinner } from './';
 
 const Channels = () => {
   const { data: channels, isLoading, error } = getChannels();
+  const errorMessage = 'Не удалось загрузить каналы';
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
   if (error) {
-    return <h1>Error</h1>;
+    return <ErrorMessage>{errorMessage}</ErrorMessage>;
   }
 
   return (
