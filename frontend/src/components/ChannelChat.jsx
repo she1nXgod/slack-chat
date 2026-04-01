@@ -10,7 +10,7 @@ const ChannelChat = () => {
         </Col>
       </Row>
 
-      <Row className="p-2">
+      <Row className="p-3">
         <Col xs={12}>
           <ChatMessages />
         </Col>

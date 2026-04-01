@@ -6,7 +6,7 @@ const Chat = () => {
   return (
     <MainLayout>
       <Row className="d-flex align-items-center g-0 h-100">
-        <Col xs={12} className="h-95">
+        <Col xs={12} className="h-95 px-4">
           <ChatInterface />
         </Col>
       </Row>
