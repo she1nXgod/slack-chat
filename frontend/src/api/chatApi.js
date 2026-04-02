@@ -31,22 +31,15 @@ export const chatApi = createApi({
         body: newMessage,
         method: 'POST',
       }),
-    }),
-    removeMessage: builder.mutation({
-      query: (id) => ({
-        url: `messages/${id}`,
-        method: 'DELETE',
-      }),
+      invalidatesTags: ['Messages'],
     }),
   }),
 });
 
-const { useGetMessagesQuery, useGetChannelsQuery, useSendMessageMutation, useRemoveMessageMutation } =
-  chatApi;
+const { useGetMessagesQuery, useGetChannelsQuery, useSendMessageMutation } = chatApi;
 
 export {
   useGetMessagesQuery as getMessages,
   useGetChannelsQuery as getChannels,
   useSendMessageMutation as sendMessage,
-  useRemoveMessageMutation as removeMessage,
 };

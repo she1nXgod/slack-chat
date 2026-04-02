@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import axios from 'axios';
 import routes from '../routes.js';
-import { setToken } from '../slices/authSlice.js';
+import { setToken, setUsername } from '../slices/authSlice.js';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Form, Button, Alert, Container } from 'react-bootstrap';
@@ -16,8 +16,10 @@ const LoginForm = () => {
       const { token, username } = responce.data;
 
       dispath(setToken(token));
+      dispath(setUsername(username));
       localStorage.setItem('token', token);
       localStorage.setItem('username', username);
+
       navigate('/');
     } catch (e) {
       console.error(e);
