@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { sendMessage } from '../api/chatApi.js';
 import { useSelector } from 'react-redux';
 import { selectCurrentUsername } from '../slices/authSlice.js';
+import { socket } from '../socket.js';
 
 const MessageForm = () => {
   const [text, setText] = useState('');
@@ -15,6 +16,7 @@ const MessageForm = () => {
 
     const newMessage = { body: text, channelId: '1', username: currentUsername };
     send(newMessage);
+    socket.emit('newMessage', newMessage);
 
     setText('');
     inputElement.current.focus();
