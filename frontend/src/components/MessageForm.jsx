@@ -3,17 +3,19 @@ import { useRef, useState } from 'react';
 import { sendMessage } from '../api/chatApi.js';
 import { useSelector } from 'react-redux';
 import { selectCurrentUsername } from '../slices/authSlice.js';
+import { selectCurrentChannel } from '../slices/uiSlice.js';
 
 const MessageForm = () => {
   const [text, setText] = useState('');
   const inputElement = useRef(null);
   const [send] = sendMessage();
   const currentUsername = useSelector(selectCurrentUsername);
+  const currentChannelId = useSelector(selectCurrentChannel);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newMessage = { body: text, channelId: '1', username: currentUsername };
+    const newMessage = { body: text, channelId: currentChannelId, username: currentUsername };
     send(newMessage);
 
     setText('');
