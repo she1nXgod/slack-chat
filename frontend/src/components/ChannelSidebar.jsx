@@ -28,7 +28,7 @@ const ChannelSidebar = () => {
           <ChannelListHeader handleShowModal={handleShowModal} />
         </Col>
       </Row>
-      <Row className="m-0 overflow-auto">
+      <Row className="m-0 h-100 overflow-auto">
         <Col xs={12} className="p-0">
           <Channels />
         </Col>
