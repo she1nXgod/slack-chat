@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useEffect, useRef } from 'react';
 import { Formik } from 'formik';
-import { createChannelModalSchema } from '../../schemas/index.js';
+import { createChannelSchema } from '../../schemas/index.js';
 import { createChannel } from '../../api/chatApi.js';
 import { useDispatch } from 'react-redux';
 import { setCurrentChannel } from '../../slices/uiSlice.js';
@@ -33,7 +33,7 @@ const CreateChannelModal = ({ handleClose }) => {
         initialValues={{
           name: '',
         }}
-        validationSchema={createChannelModalSchema}
+        validationSchema={createChannelSchema}
         onSubmit={onSubmit}
       >
         {({ handleSubmit, handleChange, handleBlur, values, errors, submitCount }) => (
