@@ -9,17 +9,18 @@ const ChatHeader = () => {
   const { data: messages, isLoading: isLoadingMessages } = getMessages();
   const currentChannelId = useSelector(selectCurrentChannel);
 
-  const channelName = channels?.find(({ id }) => id === currentChannelId);
-  const channelCountMessages = messages?.filter(({ channelId }) => channelId === currentChannelId).length;
-
   if (isLoadingChannels || isLoadingMessages) {
     return <LoadingSpinner />;
   }
 
+  const currentChannel = channels?.find(({ id }) => id === currentChannelId);
+  const channelName = currentChannel?.name || 'Loading...';
+  const сountMessages = messages?.filter(({ channelId }) => channelId === currentChannelId).length ?? 0;
+
   return (
     <Stack gap={0}>
-      <b>{`# ${channelName.name}`}</b>
-      <span className="small text-muted">{`сообщений: ${channelCountMessages}`}</span>
+      <b>{`# ${channelName}`}</b>
+      <span className="small text-muted">{`сообщений: ${сountMessages}`}</span>
     </Stack>
   );
 };

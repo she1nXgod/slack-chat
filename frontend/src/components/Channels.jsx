@@ -15,7 +15,7 @@ const Channels = () => {
   }
 
   return (
-    <Nav className="w-100 m-0">
+    <Nav className="min-h-100 w-100 m-0 overflow-auto">
       {channels.map(({ id, name, removable }) => (
         <Channel key={id} id={id} name={name} removable={removable} />
       ))}

@@ -41,11 +41,6 @@ export const chatApi = createApi({
       },
     }),
 
-    getChannels: builder.query({
-      query: () => 'channels',
-      providesTags: ['Channels'],
-    }),
-
     sendMessage: builder.mutation({
       query: (newMessage) => ({
         url: 'messages',
@@ -53,13 +48,46 @@ export const chatApi = createApi({
         method: 'POST',
       }),
     }),
+
+    getChannels: builder.query({
+      query: () => 'channels',
+      providesTags: ['Channels'],
+      async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+        try {
+          await cacheDataLoaded;
+
+          const handleNewChannel = (newChannel) => {
+            updateCachedData((draft) => {
+              draft.push(newChannel);
+            });
+          };
+
+          socket.on('newChannel', handleNewChannel);
+        } catch (err) {
+          console.error('Cache was not loaded:' + err);
+        }
+
+        await cacheEntryRemoved;
+        socket.off('newChannel');
+      },
+    }),
+
+    createChannel: builder.mutation({
+      query: (newChannel) => ({
+        url: 'channels',
+        body: newChannel,
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
-const { useGetMessagesQuery, useGetChannelsQuery, useSendMessageMutation } = chatApi;
+const { useGetMessagesQuery, useGetChannelsQuery, useSendMessageMutation, useCreateChannelMutation } =
+  chatApi;
 
 export {
   useGetMessagesQuery as getMessages,
   useGetChannelsQuery as getChannels,
   useSendMessageMutation as sendMessage,
+  useCreateChannelMutation as createChannel,
 };
