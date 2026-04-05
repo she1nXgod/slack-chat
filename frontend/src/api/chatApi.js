@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_BASE_URL } from '../config.js';
 import { socket } from '../socket.js';
+import { setCurrentChannel } from '../slices/uiSlice.js';
 
 export const chatApi = createApi({
   reducerPath: 'chatApi',
@@ -52,7 +53,7 @@ export const chatApi = createApi({
     getChannels: builder.query({
       query: () => 'channels',
       providesTags: ['Channels'],
-      async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+      async onCacheEntryAdded(arg, { dispatch, updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
         try {
           await cacheDataLoaded;
 
@@ -62,13 +63,23 @@ export const chatApi = createApi({
             });
           };
 
+          const handleRemoveChannel = ({ id: channelId }) => {
+            updateCachedData((draft) => {
+              return draft.filter((channel) => channel.id !== channelId);
+            });
+
+            dispatch(setCurrentChannel('1'));
+          };
+
           socket.on('newChannel', handleNewChannel);
+          socket.on('removeChannel', handleRemoveChannel);
         } catch (err) {
           console.error('Cache was not loaded:' + err);
         }
 
         await cacheEntryRemoved;
         socket.off('newChannel');
+        socket.off('removeChannel');
       },
     }),
 
@@ -79,15 +90,29 @@ export const chatApi = createApi({
         method: 'POST',
       }),
     }),
+
+    deleteChannel: builder.mutation({
+      query: (id) => ({
+        url: `channels/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Messages'],
+    }),
   }),
 });
 
-const { useGetMessagesQuery, useGetChannelsQuery, useSendMessageMutation, useCreateChannelMutation } =
-  chatApi;
+const {
+  useGetMessagesQuery,
+  useGetChannelsQuery,
+  useSendMessageMutation,
+  useCreateChannelMutation,
+  useDeleteChannelMutation,
+} = chatApi;
 
 export {
   useGetMessagesQuery as getMessages,
   useGetChannelsQuery as getChannels,
   useSendMessageMutation as sendMessage,
   useCreateChannelMutation as createChannel,
+  useDeleteChannelMutation as deleteChannel,
 };

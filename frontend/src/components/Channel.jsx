@@ -2,7 +2,7 @@ import { Nav, Button, Dropdown, ButtonGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentChannel, setCurrentChannel } from '../slices/uiSlice';
 
-const Channel = ({ id, name, removable }) => {
+const Channel = ({ id, name, removable, showModal }) => {
   const currentChannelId = useSelector(selectCurrentChannel);
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ const Channel = ({ id, name, removable }) => {
             />
             <Dropdown.Menu>
               <Dropdown.Item>Переименовать</Dropdown.Item>
-              <Dropdown.Item>Удалить</Dropdown.Item>
+              <Dropdown.Item onClick={() => showModal('deleteChannel', name, id)}>Удалить</Dropdown.Item>
             </Dropdown.Menu>{' '}
           </>
         ) : null}
