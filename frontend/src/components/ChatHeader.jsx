@@ -2,16 +2,11 @@ import Stack from 'react-bootstrap/Stack';
 import { getChannels, getMessages } from '../api/chatApi';
 import { useSelector } from 'react-redux';
 import { selectCurrentChannel } from '../slices/uiSlice';
-import LoadingSpinner from './LoadingSpinner';
 
 const ChatHeader = () => {
-  const { data: channels, isLoading: isLoadingChannels } = getChannels();
-  const { data: messages, isLoading: isLoadingMessages } = getMessages();
+  const { data: channels } = getChannels();
+  const { data: messages } = getMessages();
   const currentChannelId = useSelector(selectCurrentChannel);
-
-  if (isLoadingChannels || isLoadingMessages) {
-    return <LoadingSpinner />;
-  }
 
   const currentChannel = channels?.find(({ id }) => id === currentChannelId);
   const channelName = currentChannel?.name || 'Loading...';

@@ -25,8 +25,8 @@ const Channel = ({ id, name, removable }) => {
               className={`${id === currentChannelId ? 'active' : ''} rounded-0 bg-light-gray border-0`}
             />
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Переименовать</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Удалить</Dropdown.Item>
+              <Dropdown.Item>Переименовать</Dropdown.Item>
+              <Dropdown.Item>Удалить</Dropdown.Item>
             </Dropdown.Menu>{' '}
           </>
         ) : null}
