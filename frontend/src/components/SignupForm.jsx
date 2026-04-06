@@ -3,13 +3,15 @@ import { Form, Button, Alert, Container } from 'react-bootstrap';
 import axios from 'axios';
 import routes from '../routes.js';
 import { setToken, setUsername } from '../slices/authSlice.js';
-import { SignupSchema } from '../schemas/index.js';
+import { signupSchema } from '../schemas/index.js';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const SignupForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const onSubmit = async ({ username, password }, { setErrors, setSubmitting }) => {
     try {
@@ -25,7 +27,7 @@ const SignupForm = () => {
       navigate('/');
     } catch (err) {
       if (err.status === 409) {
-        setErrors({ general: 'Такой пользователь уже существует' });
+        setErrors({ general: t('signupPage.errors.userExists') });
       }
       console.error('Signup error: ' + err);
     } finally {
@@ -35,20 +37,20 @@ const SignupForm = () => {
 
   return (
     <Container className="p-4 border border-secondary-subtle rounded-3 shadow">
-      <h2 className="h2 mb-3">Sign up</h2>
+      <h2 className="h2 mb-3">{t('signupPage.title')}</h2>
       <Formik
         initialValues={{
           username: '',
           password: '',
           confirmPassword: '',
         }}
-        validationSchema={SignupSchema}
+        validationSchema={() => signupSchema(t)}
         onSubmit={onSubmit}
       >
         {({ handleSubmit, handleChange, values, errors, submitCount, isSubmitting }) => (
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formUsername">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>{t('signupPage.username')}</Form.Label>
               <Form.Control
                 type="text"
                 name="username"
@@ -63,7 +65,7 @@ const SignupForm = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formPassword">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>{t('signupPage.password')}</Form.Label>
               <Form.Control
                 type="password"
                 name="password"
@@ -78,7 +80,7 @@ const SignupForm = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formConfirmPassword">
-              <Form.Label>Confirm password</Form.Label>
+              <Form.Label>{t('signupPage.passwordConfirmation')}</Form.Label>
               <Form.Control
                 type="password"
                 name="confirmPassword"
@@ -99,18 +101,11 @@ const SignupForm = () => {
             ) : null}
 
             <Button disabled={isSubmitting} type="submit" className="w-100 mb-3">
-              Зарегистрироваться
+              {isSubmitting ? t('signupPage.signupProcess') : t('signupPage.signup')}
             </Button>
             <div className="small">
-              Уже есть аккаунт? <a href="/login">Войти</a>
+              {t('signupPage.hasAccount')} <a href="/login">{t('signupPage.login')}</a>
             </div>
-            {/* <Field name="name" />
-            {errors.name && touched.name ? <div>{errors.name}</div> : null}
-            <Field name="password" type="password" />
-            {errors.password && touched.password ? <div>{errors.password}</div> : null}
-            <Field name="confirmPassword" type="password" />
-            {errors.confirmPassword && touched.confirmPassword ? <div>{errors.confirmPassword}</div> : null}
-            <button type="submit">Submit</button> */}
           </Form>
         )}
       </Formik>

@@ -3,16 +3,18 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useEffect, useRef } from 'react';
 import { Formik } from 'formik';
-import { createChannelSchema } from '../../schemas/index.js';
+import { channelSchema } from '../../schemas/index.js';
 import { createChannel, getChannels } from '../../api/chatApi.js';
 import { useDispatch } from 'react-redux';
 import { setCurrentChannel } from '../../slices/uiSlice.js';
+import { useTranslation } from 'react-i18next';
 
 const CreateChannelModal = ({ handleClose }) => {
   const { data: channels = [] } = getChannels();
   const inputRef = useRef(null);
   const [create] = createChannel();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     inputRef.current.focus();
@@ -34,17 +36,17 @@ const CreateChannelModal = ({ handleClose }) => {
         initialValues={{
           name: '',
         }}
-        validationSchema={() => createChannelSchema(channels)}
+        validationSchema={() => channelSchema(channels, t)}
         onSubmit={onSubmit}
       >
-        {({ handleSubmit, handleChange, handleBlur, values, errors, submitCount }) => (
+        {({ handleSubmit, handleChange, handleBlur, values, errors, submitCount, isSubmitting }) => (
           <Form onSubmit={handleSubmit}>
             <Modal.Header closeButton>
-              <Modal.Title>Добавить канал</Modal.Title>
+              <Modal.Title>{t('modals.add')}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form.Group className="pb-1">
-                <Form.Label>Имя канала</Form.Label>
+                <Form.Label>{t('modals.label')}</Form.Label>
                 <Form.Control
                   type="text"
                   name="name"
@@ -53,7 +55,6 @@ const CreateChannelModal = ({ handleClose }) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   isInvalid={submitCount > 0 && errors.name}
-                  placeholder="Имя канала"
                   autoFocus
                 />
               </Form.Group>
@@ -61,10 +62,10 @@ const CreateChannelModal = ({ handleClose }) => {
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
-                Отменить
+                {t('modals.cancel')}
               </Button>
-              <Button type="submit" variant="primary">
-                Добавить
+              <Button disabled={isSubmitting} type="submit" variant="primary">
+                {isSubmitting ? t('modals.loading') : t('modals.send')}
               </Button>
             </Modal.Footer>
           </Form>

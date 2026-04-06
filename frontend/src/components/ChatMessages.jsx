@@ -3,12 +3,13 @@ import { getMessages } from '../api/chatApi';
 import { Message, LoadingSpinner, ErrorMessage } from './';
 import { useSelector } from 'react-redux';
 import { selectCurrentChannel } from '../slices/uiSlice';
+import { useTranslation } from 'react-i18next';
 
 const ChatMessages = () => {
   const { data: messages, error, isLoading } = getMessages();
   const messagesEndRef = useRef(null);
   const currentChannelId = useSelector(selectCurrentChannel);
-  const errorMessage = 'Не удалось загрузить чат';
+  const { t } = useTranslation();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -19,7 +20,7 @@ const ChatMessages = () => {
   }
 
   if (error) {
-    return <ErrorMessage>{errorMessage}</ErrorMessage>;
+    return <ErrorMessage>{t('messages.errors.errorLoadingMessages')}</ErrorMessage>;
   }
 
   const currentChannelMessages = messages.filter(({ channelId }) => channelId === currentChannelId);

@@ -1,10 +1,12 @@
 import { Nav, Button, Dropdown, ButtonGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentChannel, setCurrentChannel } from '../slices/uiSlice';
+import { useTranslation } from 'react-i18next';
 
 const Channel = ({ id, name, removable, showModal }) => {
   const currentChannelId = useSelector(selectCurrentChannel);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   return (
     <Nav.Item className="w-100">
@@ -25,8 +27,12 @@ const Channel = ({ id, name, removable, showModal }) => {
               className={`${id === currentChannelId ? 'active' : ''} rounded-0 bg-light-gray border-0`}
             />
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => showModal('editChannel', name, id)}>Переименовать</Dropdown.Item>
-              <Dropdown.Item onClick={() => showModal('deleteChannel', name, id)}>Удалить</Dropdown.Item>
+              <Dropdown.Item onClick={() => showModal('editChannel', name, id)}>
+                {t('channels.rename')}
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => showModal('deleteChannel', name, id)}>
+                {t('channels.remove')}
+              </Dropdown.Item>
             </Dropdown.Menu>{' '}
           </>
         ) : null}

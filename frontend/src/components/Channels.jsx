@@ -1,17 +1,18 @@
 import { Nav } from 'react-bootstrap';
 import { getChannels } from '../api/chatApi.js';
 import { Channel, ErrorMessage, LoadingSpinner } from './';
+import { useTranslation } from 'react-i18next';
 
 const Channels = ({ showModal }) => {
   const { data: channels, isLoading, error } = getChannels();
-  const errorMessage = 'Не удалось загрузить каналы';
+  const { t } = useTranslation();
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
   if (error) {
-    return <ErrorMessage>{errorMessage}</ErrorMessage>;
+    return <ErrorMessage>{t('channels.errors.errorLoadingChannels')}</ErrorMessage>;
   }
 
   return (

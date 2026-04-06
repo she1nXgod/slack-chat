@@ -4,12 +4,14 @@ import Form from 'react-bootstrap/Form';
 import { useEffect, useRef } from 'react';
 import { Formik } from 'formik';
 import { getChannels, editChannel } from '../../api/chatApi.js';
-import { createChannelSchema } from '../../schemas/index.js';
+import { channelSchema } from '../../schemas/index.js';
+import { useTranslation } from 'react-i18next';
 
 const EditChannelModal = ({ handleClose, channelName, channelId }) => {
   const { data: channels = [] } = getChannels();
   const inputRef = useRef(null);
   const [edit] = editChannel();
+  const { t } = useTranslation();
 
   useEffect(() => {
     inputRef.current.focus();
@@ -26,17 +28,17 @@ const EditChannelModal = ({ handleClose, channelName, channelId }) => {
         initialValues={{
           name: channelName,
         }}
-        validationSchema={() => createChannelSchema(channels, channelName)}
+        validationSchema={() => channelSchema(channels, t, channelName)}
         onSubmit={onSubmit}
       >
-        {({ handleSubmit, handleChange, handleBlur, values, errors, submitCount }) => (
+        {({ handleSubmit, handleChange, handleBlur, values, errors, submitCount, isSubmitting }) => (
           <Form onSubmit={handleSubmit}>
             <Modal.Header closeButton>
-              <Modal.Title>Переименовать канал</Modal.Title>
+              <Modal.Title>{t('modals.rename')}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form.Group className="pb-1">
-                <Form.Label>Имя канала</Form.Label>
+                <Form.Label>{t('modals.label')}</Form.Label>
                 <Form.Control
                   type="text"
                   name="name"
@@ -45,7 +47,6 @@ const EditChannelModal = ({ handleClose, channelName, channelId }) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   isInvalid={submitCount > 0 && errors.name}
-                  placeholder="Имя канала"
                   autoFocus
                 />
               </Form.Group>
@@ -53,10 +54,10 @@ const EditChannelModal = ({ handleClose, channelName, channelId }) => {
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
-                Отменить
+                {t('modals.cancel')}
               </Button>
-              <Button type="submit" variant="primary">
-                Изменить
+              <Button disabled={isSubmitting} type="submit" variant="primary">
+                {isSubmitting ? t('modals.loading') : t('modals.send')}
               </Button>
             </Modal.Footer>
           </Form>
