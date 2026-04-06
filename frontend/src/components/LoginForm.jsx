@@ -8,21 +8,21 @@ import { Form, Button, Alert, Container } from 'react-bootstrap';
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
-  const onSubmit = async (values, { setErrors, setSubmitting }) => {
+  const onSubmit = async (user, { setErrors, setSubmitting }) => {
     try {
-      const responce = await axios.post(routes.loginPath(), values);
+      const responce = await axios.post(routes.loginPath(), user);
       const { token, username } = responce.data;
 
-      dispath(setToken(token));
-      dispath(setUsername(username));
+      dispatch(setToken(token));
+      dispatch(setUsername(username));
       localStorage.setItem('token', token);
       localStorage.setItem('username', username);
 
       navigate('/');
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error('Login error: ' + err);
       setErrors({ general: 'Неверные имя пользователя или пароль' });
     } finally {
       setSubmitting(false);
@@ -48,10 +48,10 @@ const LoginForm = () => {
                 name="username"
                 value={values.username}
                 onChange={handleChange}
-                placeholder="Username"
                 autoComplete="username"
               />
             </Form.Group>
+
             <Form.Group className="mb-3" controlId="formPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
@@ -59,18 +59,22 @@ const LoginForm = () => {
                 name="password"
                 value={values.password}
                 onChange={handleChange}
-                placeholder="Password"
                 autoComplete="password"
               />
             </Form.Group>
+
             {errors.general ? (
               <Alert variant="danger" className="p-2">
                 {errors.general}
               </Alert>
             ) : null}
-            <Button disabled={isSubmitting} type="submit" className="w-100">
+
+            <Button disabled={isSubmitting} type="submit" className="w-100 mb-3">
               Submit
             </Button>
+            <div className="small">
+              Нет аккаунта? <a href="/signup">Регистрация</a>
+            </div>
           </Form>
         )}
       </Formik>

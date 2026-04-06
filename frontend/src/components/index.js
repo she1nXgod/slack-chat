@@ -14,3 +14,4 @@ export { default as ChannelChat } from './ChannelChat.jsx';
 export { default as Message } from './Message.jsx';
 export { default as ChatHeader } from './ChatHeader.jsx';
 export { default as MessageForm } from './MessageForm.jsx';
+export { default as SignupForm } from './SignupForm.jsx';
