@@ -25,7 +25,7 @@ const Channel = ({ id, name, removable, showModal }) => {
               className={`${id === currentChannelId ? 'active' : ''} rounded-0 bg-light-gray border-0`}
             />
             <Dropdown.Menu>
-              <Dropdown.Item>Переименовать</Dropdown.Item>
+              <Dropdown.Item onClick={() => showModal('editChannel', name, id)}>Переименовать</Dropdown.Item>
               <Dropdown.Item onClick={() => showModal('deleteChannel', name, id)}>Удалить</Dropdown.Item>
             </Dropdown.Menu>{' '}
           </>

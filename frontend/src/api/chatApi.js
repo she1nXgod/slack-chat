@@ -71,14 +71,21 @@ export const chatApi = createApi({
               return draft.filter((channel) => channel.id !== channelId);
             });
 
-            const { ui } = getState();
-            if (ui.currentChannel === channelId) {
+            const currentChannelId = getState().ui.currentChannel;
+            if (currentChannelId === channelId) {
               dispatch(setCurrentChannel('1'));
             }
           };
 
+          const handleEditChannel = ({ id, name }) => {
+            updateCachedData((draft) => {
+              return draft.map((channel) => (channel.id === id ? { ...channel, name: name } : channel));
+            });
+          };
+
           socket.on('newChannel', handleNewChannel);
           socket.on('removeChannel', handleRemoveChannel);
+          socket.on('renameChannel', handleEditChannel);
         } catch (err) {
           console.error('Cache was not loaded:' + err);
         }
@@ -86,6 +93,7 @@ export const chatApi = createApi({
         await cacheEntryRemoved;
         socket.off('newChannel');
         socket.off('removeChannel');
+        socket.off('renameChannel');
       },
     }),
 
@@ -104,6 +112,14 @@ export const chatApi = createApi({
       }),
       invalidatesTags: ['Messages'],
     }),
+
+    editChannel: builder.mutation({
+      query: ({ id, newName }) => ({
+        url: `channels/${id}`,
+        body: newName,
+        method: 'PATCH',
+      }),
+    }),
   }),
 });
 
@@ -113,6 +129,7 @@ const {
   useSendMessageMutation,
   useCreateChannelMutation,
   useDeleteChannelMutation,
+  useEditChannelMutation,
 } = chatApi;
 
 export {
@@ -121,4 +138,5 @@ export {
   useSendMessageMutation as sendMessage,
   useCreateChannelMutation as createChannel,
   useDeleteChannelMutation as deleteChannel,
+  useEditChannelMutation as editChannel,
 };
