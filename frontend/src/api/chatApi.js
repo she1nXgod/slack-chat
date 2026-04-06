@@ -53,7 +53,10 @@ export const chatApi = createApi({
     getChannels: builder.query({
       query: () => 'channels',
       providesTags: ['Channels'],
-      async onCacheEntryAdded(arg, { dispatch, updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+      async onCacheEntryAdded(
+        arg,
+        { dispatch, getState, updateCachedData, cacheDataLoaded, cacheEntryRemoved },
+      ) {
         try {
           await cacheDataLoaded;
 
@@ -68,7 +71,10 @@ export const chatApi = createApi({
               return draft.filter((channel) => channel.id !== channelId);
             });
 
-            dispatch(setCurrentChannel('1'));
+            const { ui } = getState();
+            if (ui.currentChannel === channelId) {
+              dispatch(setCurrentChannel('1'));
+            }
           };
 
           socket.on('newChannel', handleNewChannel);

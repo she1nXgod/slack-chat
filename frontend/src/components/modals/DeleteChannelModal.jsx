@@ -1,16 +1,13 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { deleteChannel } from '../../api/chatApi';
-import { useDispatch } from 'react-redux';
-import { setCurrentChannel } from '../../slices/uiSlice';
 
 const DeleteChannelModal = ({ handleClose, channelName, channelId }) => {
   const [remove] = deleteChannel();
-  const dispatch = useDispatch();
+
   const handleRemove = () => {
     remove(channelId);
     handleClose();
-    dispatch(setCurrentChannel('1'));
   };
 
   return (
