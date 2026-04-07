@@ -13,7 +13,7 @@ const ChatMessages = () => {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, currentChannelId]);
 
   if (isLoading) {
     return <LoadingSpinner />;
