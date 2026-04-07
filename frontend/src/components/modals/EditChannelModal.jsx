@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import { getChannels, editChannel } from '../../api/chatApi.js';
 import { channelSchema } from '../../schemas/index.js';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const EditChannelModal = ({ handleClose, channelName, channelId }) => {
   const { data: channels = [] } = getChannels();
@@ -17,9 +18,16 @@ const EditChannelModal = ({ handleClose, channelName, channelId }) => {
     inputRef.current.focus();
   }, []);
 
-  const onSubmit = (newName) => {
-    edit({ id: channelId, newName });
-    handleClose();
+  const onSubmit = async (newName) => {
+    try {
+      await edit({ id: channelId, newName }).unwrap();
+      toast.success(t('channels.toasts.rename'));
+    } catch (err) {
+      console.error(err.status);
+      toast.error(t('channels.toasts.errors.rename'));
+    } finally {
+      handleClose();
+    }
   };
 
   return (

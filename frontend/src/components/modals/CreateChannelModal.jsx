@@ -8,6 +8,7 @@ import { createChannel, getChannels } from '../../api/chatApi.js';
 import { useDispatch } from 'react-redux';
 import { setCurrentChannel } from '../../slices/uiSlice.js';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const CreateChannelModal = ({ handleClose }) => {
   const { data: channels = [] } = getChannels();
@@ -23,10 +24,14 @@ const CreateChannelModal = ({ handleClose }) => {
   const onSubmit = async (newChannel) => {
     try {
       const { id } = await create(newChannel).unwrap();
+
       dispatch(setCurrentChannel(id));
-      handleClose();
+      toast.success(t('channels.toasts.create'));
     } catch (err) {
-      console.error('Error during creation:' + err);
+      console.error(err.status);
+      toast.error(t('channels.toasts.errors.create'));
+    } finally {
+      handleClose();
     }
   };
 

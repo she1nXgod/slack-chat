@@ -2,14 +2,22 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { deleteChannel } from '../../api/chatApi';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const DeleteChannelModal = ({ handleClose, channelName, channelId }) => {
   const [remove] = deleteChannel();
   const { t } = useTranslation();
 
-  const handleRemove = () => {
-    remove(channelId);
-    handleClose();
+  const handleRemove = async () => {
+    try {
+      await remove(channelId).unwrap();
+      toast.success(t('channels.toasts.remove'));
+    } catch (err) {
+      console.error(err.status);
+      toast.error(t('channels.toasts.errors.remove'));
+    } finally {
+      handleClose();
+    }
   };
 
   return (
