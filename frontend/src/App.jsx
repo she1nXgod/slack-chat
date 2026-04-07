@@ -8,6 +8,7 @@ import { selectCurrentToken } from './slices/authSlice.js';
 
 const App = () => {
   const isAuth = useSelector(selectCurrentToken);
+
   return (
     <BrowserRouter>
       <Routes>

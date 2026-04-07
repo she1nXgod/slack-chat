@@ -60,6 +60,7 @@ const CreateChannelModal = ({ handleClose }) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   isInvalid={submitCount > 0 && errors.name}
+                  autoComplete="off"
                   autoFocus
                 />
               </Form.Group>

@@ -20,13 +20,13 @@ const LoginForm = () => {
 
       dispatch(setToken(token));
       dispatch(setUsername(username));
-      localStorage.setItem('token', token);
-      localStorage.setItem('username', username);
-
       navigate('/');
     } catch (err) {
-      console.error('Login error: ' + err);
-      setErrors({ general: t('loginPage.error') });
+      if (err.status === 401) {
+        setErrors({ general: t('loginPage.error') });
+      }
+
+      console.error('Login error: ', err);
     } finally {
       setSubmitting(false);
     }

@@ -2,43 +2,60 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_BASE_URL } from '../config.js';
 import { socket } from '../socket.js';
 import { setCurrentChannel } from '../slices/uiSlice.js';
+import { logout } from '../slices/authSlice.js';
+import { toast } from 'react-toastify';
+
+const baseQuery = fetchBaseQuery({
+  baseUrl: API_BASE_URL,
+  prepareHeaders: (headers, { getState }) => {
+    const token = getState().auth.token;
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  },
+});
+
+const customBaseQuery = async (args, api, extraOptions) => {
+  const result = await baseQuery(args, api, extraOptions);
+  if (result.error) {
+    const { status } = result.error;
+
+    if (status === 401) {
+      api.dispatch(logout());
+    } else if (status === 'FETCH_ERROR') {
+      console.error('Network error: ', result.error);
+      toast.error('Ошибка соединения');
+    }
+  }
+
+  return result;
+};
 
 export const chatApi = createApi({
   reducerPath: 'chatApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_BASE_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.token;
-
-      if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
-      }
-
-      return headers;
-    },
-  }),
+  baseQuery: customBaseQuery,
   tagTypes: ['Messages', 'Channels'],
   endpoints: (builder) => ({
     getMessages: builder.query({
       query: () => 'messages',
       providesTags: ['Messages'],
       async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+        const handleNewMessage = (newMessage) => {
+          updateCachedData((draft) => {
+            draft.push(newMessage);
+          });
+        };
+
         try {
           await cacheDataLoaded;
-
-          const handleNewMessage = (newMessage) => {
-            updateCachedData((draft) => {
-              draft.push(newMessage);
-            });
-          };
-
           socket.on('newMessage', handleNewMessage);
         } catch (err) {
-          console.error('Cache was not loaded:' + err);
+          console.error('Cache was not loaded: ', err);
         }
 
         await cacheEntryRemoved;
-        socket.off('newMessage');
+        socket.off('newMessage', handleNewMessage);
       },
     }),
 
@@ -57,43 +74,42 @@ export const chatApi = createApi({
         arg,
         { dispatch, getState, updateCachedData, cacheDataLoaded, cacheEntryRemoved },
       ) {
+        const handleNewChannel = (newChannel) => {
+          updateCachedData((draft) => {
+            draft.push(newChannel);
+          });
+        };
+
+        const handleRemoveChannel = ({ id: channelId }) => {
+          updateCachedData((draft) => {
+            return draft.filter((channel) => channel.id !== channelId);
+          });
+
+          const currentChannelId = getState().ui.currentChannel;
+          if (currentChannelId === channelId) {
+            dispatch(setCurrentChannel('1'));
+          }
+        };
+
+        const handleEditChannel = ({ id, name }) => {
+          updateCachedData((draft) => {
+            return draft.map((channel) => (channel.id === id ? { ...channel, name: name } : channel));
+          });
+        };
+
         try {
           await cacheDataLoaded;
-
-          const handleNewChannel = (newChannel) => {
-            updateCachedData((draft) => {
-              draft.push(newChannel);
-            });
-          };
-
-          const handleRemoveChannel = ({ id: channelId }) => {
-            updateCachedData((draft) => {
-              return draft.filter((channel) => channel.id !== channelId);
-            });
-
-            const currentChannelId = getState().ui.currentChannel;
-            if (currentChannelId === channelId) {
-              dispatch(setCurrentChannel('1'));
-            }
-          };
-
-          const handleEditChannel = ({ id, name }) => {
-            updateCachedData((draft) => {
-              return draft.map((channel) => (channel.id === id ? { ...channel, name: name } : channel));
-            });
-          };
-
           socket.on('newChannel', handleNewChannel);
           socket.on('removeChannel', handleRemoveChannel);
           socket.on('renameChannel', handleEditChannel);
         } catch (err) {
-          console.error('Cache was not loaded:' + err);
+          console.error('Cache was not loaded: ', err);
         }
 
         await cacheEntryRemoved;
-        socket.off('newChannel');
-        socket.off('removeChannel');
-        socket.off('renameChannel');
+        socket.off('newChannel', handleNewChannel);
+        socket.off('removeChannel', handleRemoveChannel);
+        socket.off('renameChannel', handleEditChannel);
       },
     }),
 

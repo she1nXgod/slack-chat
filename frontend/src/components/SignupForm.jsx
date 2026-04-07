@@ -21,15 +21,12 @@ const SignupForm = () => {
 
       dispatch(setToken(token));
       dispatch(setUsername(name));
-      localStorage.setItem('token', token);
-      localStorage.setItem('username', name);
-
       navigate('/');
     } catch (err) {
       if (err.status === 409) {
         setErrors({ general: t('signupPage.errors.userExists') });
       }
-      console.error('Signup error: ' + err);
+      console.error('Signup error: ', err);
     } finally {
       setSubmitting(false);
     }
@@ -47,7 +44,7 @@ const SignupForm = () => {
         validationSchema={() => signupSchema(t)}
         onSubmit={onSubmit}
       >
-        {({ handleSubmit, handleChange, values, errors, submitCount, isSubmitting }) => (
+        {({ handleSubmit, handleChange, handleBlur, values, errors, touched, isSubmitting }) => (
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formUsername">
               <Form.Label>{t('signupPage.username')}</Form.Label>
@@ -56,10 +53,11 @@ const SignupForm = () => {
                 name="username"
                 value={values.username}
                 onChange={handleChange}
-                isInvalid={submitCount > 0 && errors.username}
+                onBlur={handleBlur}
+                isInvalid={touched.username && errors.username}
                 autoComplete="false"
               />
-              {submitCount > 0 && errors.username ? (
+              {touched.username && errors.username ? (
                 <div className="text-danger small">{errors.username}</div>
               ) : null}
             </Form.Group>
@@ -71,10 +69,11 @@ const SignupForm = () => {
                 name="password"
                 value={values.password}
                 onChange={handleChange}
-                isInvalid={submitCount > 0 && errors.password}
+                onBlur={handleBlur}
+                isInvalid={touched.password && errors.password}
                 autoComplete="new-password"
               />
-              {submitCount > 0 && errors.password ? (
+              {touched.password && errors.password ? (
                 <div className="text-danger small">{errors.password}</div>
               ) : null}
             </Form.Group>
@@ -86,11 +85,12 @@ const SignupForm = () => {
                 name="confirmPassword"
                 value={values.confirmPassword}
                 onChange={handleChange}
-                isInvalid={submitCount > 0 && errors.confirmPassword}
+                onBlur={handleBlur}
+                isInvalid={touched.confirmPassword && errors.confirmPassword}
                 autoComplete="new-password"
               />
-              {errors.confirmPassword ? (
-                <div className="text-danger small">{submitCount > 0 && errors.confirmPassword}</div>
+              {touched.confirmPassword && errors.confirmPassword ? (
+                <div className="text-danger small">{errors.confirmPassword}</div>
               ) : null}
             </Form.Group>
 
