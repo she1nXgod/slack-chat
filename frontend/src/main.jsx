@@ -9,15 +9,20 @@ import { rollbarConfig } from './rollbar.js';
 import App from './App.jsx';
 import store from './store.js';
 import { ToastContainer } from 'react-toastify';
+import { I18nextProvider } from 'react-i18next';
 
-initI18n().then(() => {
-  createRoot(document.getElementById('root')).render(
+const root = createRoot(document.getElementById('root'));
+
+initI18n().then((i18nInstance) => {
+  root.render(
     <StrictMode>
       <RollbarProvider config={rollbarConfig}>
         <ErrorBoundary>
           <ReduxProvider store={store}>
-            <App />
-            <ToastContainer autoClose={2500} />
+            <I18nextProvider i18n={i18nInstance}>
+              <App />
+              <ToastContainer autoClose={2500} />
+            </I18nextProvider>
           </ReduxProvider>
         </ErrorBoundary>
       </RollbarProvider>
