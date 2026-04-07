@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUsername } from '../slices/authSlice.js';
 import { selectCurrentChannel } from '../slices/uiSlice.js';
 import { useTranslation } from 'react-i18next';
+import filter from 'leo-profanity';
 
 const MessageForm = () => {
   const [text, setText] = useState('');
@@ -17,7 +18,13 @@ const MessageForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newMessage = { body: text, channelId: currentChannelId, username: currentUsername };
+    filter.loadDictionary('ru');
+    const ruBadWords = filter.list();
+    filter.loadDictionary('en');
+    filter.add(ruBadWords);
+
+    const filteredText = filter.clean(text);
+    const newMessage = { body: filteredText, channelId: currentChannelId, username: currentUsername };
     send(newMessage);
 
     setText('');
