@@ -53,7 +53,7 @@ export default {
       },
       toasts: {
         create: 'Канал создан',
-        remove: 'Канал удален',
+        remove: 'Канал удалён',
         rename: 'Канал переименован',
         errors: {
           create: 'Ошибка создания канала',
