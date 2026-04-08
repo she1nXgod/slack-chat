@@ -1,5 +1,6 @@
 install:
 	npm ci
+	npm ci --prefix frontend
 
 start:
 	npx start-server -s ./frontend/dist
@@ -14,7 +15,7 @@ preview:
 	npm run preview --prefix frontend
 
 lint:
-	cd frontend && npm run lint
+	npm run lint --prefix frontend
 
 lint-fix:
-	cd frontend && eslint . --fix
+	npm run lint --prefix frontend -- --fix
