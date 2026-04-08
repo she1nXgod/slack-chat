@@ -24,8 +24,10 @@ const Channel = ({ id, name, removable, showModal }) => {
             <Dropdown.Toggle
               split
               variant={id === currentChannelId ? 'secondary' : 'light'}
-              className={`${id === currentChannelId ? 'active' : ''} rounded-0 bg-light-gray border-0`}
-            />
+              className={`${id === currentChannelId ? 'active' : ''} rounded-0 bg-light-gray border-0 text-muted`}
+            >
+              {t('channels.management')}
+            </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => showModal('editChannel', name, id)}>
                 {t('channels.rename')}

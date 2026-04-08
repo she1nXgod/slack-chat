@@ -42,6 +42,7 @@ export default {
     },
     channels: {
       title: 'Каналы',
+      management: 'Управление каналом ',
       rename: 'Переименовать',
       remove: 'Удалить',
       validation: {
