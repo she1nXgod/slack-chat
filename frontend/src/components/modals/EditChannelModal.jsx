@@ -45,7 +45,7 @@ const EditChannelModal = ({ handleClose, channelName, channelId }) => {
               <Modal.Title>{t('modals.rename')}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form.Group className="pb-1">
+              <Form.Group className="pb-1" controlId="renameChannelName">
                 <Form.Label>{t('modals.label')}</Form.Label>
                 <Form.Control
                   type="text"

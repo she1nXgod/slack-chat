@@ -50,7 +50,7 @@ const CreateChannelModal = ({ handleClose }) => {
               <Modal.Title>{t('modals.add')}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form.Group className="pb-1">
+              <Form.Group className="pb-1" controlId="channelName">
                 <Form.Label>{t('modals.label')}</Form.Label>
                 <Form.Control
                   type="text"
