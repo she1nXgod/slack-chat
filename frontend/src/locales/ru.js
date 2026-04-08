@@ -77,6 +77,7 @@ export default {
     },
     messages: {
       placeholder: 'Введите сообщение...',
+      newMessage: 'Новое сообщение',
       send: 'Отправить',
       messagesCount: 'сообщений:',
       loading: 'Загрузка...',

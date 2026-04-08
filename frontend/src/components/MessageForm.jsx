@@ -40,6 +40,7 @@ const MessageForm = () => {
               type="text"
               ref={inputElement}
               value={text}
+              aria-label={t('messages.newMessage')}
               placeholder={t('messages.placeholder')}
               autoComplete="off"
               onChange={(e) => setText(e.target.value)}
