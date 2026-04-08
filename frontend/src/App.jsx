@@ -12,15 +12,24 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={isAuth
-? <Chat />
-: <Navigate to="/login" />} />
-        <Route path="login" element={isAuth
-? <Navigate to="/" />
-: <Login />} />
-        <Route path="signup" element={isAuth
-? <Navigate to="/" />
-: <Signup />} />
+        <Route
+          path="/"
+          element={isAuth
+            ? <Chat />
+            : <Navigate to="/login" />}
+        />
+        <Route
+          path="login"
+          element={isAuth
+            ? <Navigate to="/" />
+            : <Login />}
+        />
+        <Route
+          path="signup"
+          element={isAuth
+            ? <Navigate to="/" />
+            : <Signup />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

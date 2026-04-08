@@ -20,9 +20,11 @@ const ChatMessages = () => {
   }
 
   if (error) {
-    return <ErrorMessage>
-{t('messages.errors.errorLoadingMessages')}
-</ErrorMessage>
+    return (
+      <ErrorMessage>
+        {t('messages.errors.errorLoadingMessages')}
+      </ErrorMessage>
+    )
   }
 
   const currentChannelMessages = messages.filter(({ channelId }) => channelId === currentChannelId)

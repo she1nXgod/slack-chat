@@ -31,10 +31,12 @@ const CreateChannelModal = ({ handleClose }) => {
 
       dispatch(setCurrentChannel(id))
       toast.success(t('channels.toasts.create'))
-    } catch (err) {
+    }
+    catch (err) {
       console.error(err.status)
       toast.error(t('channels.toasts.errors.create'))
-    } finally {
+    }
+    finally {
       handleClose()
     }
   }
@@ -52,14 +54,14 @@ const CreateChannelModal = ({ handleClose }) => {
           <Form onSubmit={handleSubmit}>
             <Modal.Header closeButton>
               <Modal.Title>
-{t('modals.add')}
-</Modal.Title>
+                {t('modals.add')}
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form.Group className="pb-1" controlId="channelName">
                 <Form.Label>
-{t('modals.label')}
-</Form.Label>
+                  {t('modals.label')}
+                </Form.Label>
                 <Form.Control
                   type="text"
                   name="name"
@@ -73,10 +75,12 @@ const CreateChannelModal = ({ handleClose }) => {
                 />
               </Form.Group>
               {submitCount > 0 && errors.name
-? <div className="text-danger small">
-{errors.name}
-</div>
-: null}
+                ? (
+                  <div className="text-danger small">
+                    {errors.name}
+                  </div>
+                )
+                : null}
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
@@ -84,8 +88,8 @@ const CreateChannelModal = ({ handleClose }) => {
               </Button>
               <Button disabled={isSubmitting} type="submit" variant="primary">
                 {isSubmitting
-? t('modals.loading')
-: t('modals.send')}
+                  ? t('modals.loading')
+                  : t('modals.send')}
               </Button>
             </Modal.Footer>
           </Form>

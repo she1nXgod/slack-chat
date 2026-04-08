@@ -23,7 +23,8 @@ const customBaseQuery = async (args, api, extraOptions) => {
 
     if (status === 401) {
       api.dispatch(logout())
-    } else if (status === 'FETCH_ERROR') {
+    }
+    else if (status === 'FETCH_ERROR') {
       console.error('Network error: ', result.error)
       toast.error('Ошибка соединения')
     }
@@ -50,7 +51,8 @@ export const chatApi = createApi({
         try {
           await cacheDataLoaded
           socket.on('newMessage', handleNewMessage)
-        } catch (err) {
+        }
+        catch (err) {
           console.error('Cache was not loaded: ', err)
         }
 
@@ -94,8 +96,8 @@ export const chatApi = createApi({
         const handleEditChannel = ({ id, name }) => {
           updateCachedData(draft => {
             return draft.map(channel => (channel.id === id
-? { ...channel, name: name }
-: channel))
+              ? { ...channel, name: name }
+              : channel))
           })
         }
 
@@ -104,7 +106,8 @@ export const chatApi = createApi({
           socket.on('newChannel', handleNewChannel)
           socket.on('removeChannel', handleRemoveChannel)
           socket.on('renameChannel', handleEditChannel)
-        } catch (err) {
+        }
+        catch (err) {
           console.error('Cache was not loaded: ', err)
         }
 

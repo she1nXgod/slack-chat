@@ -13,42 +13,42 @@ const Channel = ({ id, name, removable, showModal }) => {
       <Dropdown as={ButtonGroup} className="w-100">
         <Button
           variant={id === currentChannelId
-? 'secondary'
-: 'light'}
+            ? 'secondary'
+            : 'light'}
           className={`${id === currentChannelId
-? 'active'
-: ''} w-100 rounded-0 text-start bg-light-gray border-0`}
+            ? 'active'
+            : ''} w-100 rounded-0 text-start bg-light-gray border-0`}
           onClick={() => dispatch(setCurrentChannel(id))}
         >
           {`# ${name}`}
         </Button>
 
         {removable
-? (
-          <>
-            <Dropdown.Toggle
-              split
-              variant={id === currentChannelId
-? 'secondary'
-: 'light'}
-              className={`${id === currentChannelId
-? 'active'
-: ''} rounded-0 bg-light-gray border-0 text-muted`}
-            >
-              {t('channels.management')}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => showModal('editChannel', name, id)}>
-                {t('channels.rename')}
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => showModal('deleteChannel', name, id)}>
-                {t('channels.remove')}
-              </Dropdown.Item>
-            </Dropdown.Menu>
-{' '}
-          </>
-        )
-: null}
+          ? (
+            <>
+              <Dropdown.Toggle
+                split
+                variant={id === currentChannelId
+                  ? 'secondary'
+                  : 'light'}
+                className={`${id === currentChannelId
+                  ? 'active'
+                  : ''} rounded-0 bg-light-gray border-0 text-muted`}
+              >
+                {t('channels.management')}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => showModal('editChannel', name, id)}>
+                  {t('channels.rename')}
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => showModal('deleteChannel', name, id)}>
+                  {t('channels.remove')}
+                </Dropdown.Item>
+              </Dropdown.Menu>
+              {' '}
+            </>
+          )
+          : null}
       </Dropdown>
     </Nav.Item>
   )

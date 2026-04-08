@@ -26,10 +26,12 @@ const EditChannelModal = ({ handleClose, channelName, channelId }) => {
 
       await edit({ id: channelId, newName }).unwrap()
       toast.success(t('channels.toasts.rename'))
-    } catch (err) {
+    }
+    catch (err) {
       console.error(err.status)
       toast.error(t('channels.toasts.errors.rename'))
-    } finally {
+    }
+    finally {
       handleClose()
     }
   }
@@ -47,14 +49,14 @@ const EditChannelModal = ({ handleClose, channelName, channelId }) => {
           <Form onSubmit={handleSubmit}>
             <Modal.Header closeButton>
               <Modal.Title>
-{t('modals.rename')}
-</Modal.Title>
+                {t('modals.rename')}
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form.Group className="pb-1" controlId="renameChannelName">
                 <Form.Label>
-{t('modals.label')}
-</Form.Label>
+                  {t('modals.label')}
+                </Form.Label>
                 <Form.Control
                   type="text"
                   name="name"
@@ -68,10 +70,12 @@ const EditChannelModal = ({ handleClose, channelName, channelId }) => {
                 />
               </Form.Group>
               {submitCount > 0 && errors.name
-? <div className="text-danger small">
-{errors.name}
-</div>
-: null}
+                ? (
+                  <div className="text-danger small">
+                    {errors.name}
+                  </div>
+                )
+                : null}
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
@@ -79,8 +83,8 @@ const EditChannelModal = ({ handleClose, channelName, channelId }) => {
               </Button>
               <Button disabled={isSubmitting} type="submit" variant="primary">
                 {isSubmitting
-? t('modals.loading')
-: t('modals.send')}
+                  ? t('modals.loading')
+                  : t('modals.send')}
               </Button>
             </Modal.Footer>
           </Form>

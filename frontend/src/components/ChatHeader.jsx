@@ -17,11 +17,11 @@ const ChatHeader = () => {
   return (
     <Stack gap={0}>
       <b>
-{`# ${channelName}`}
-</b>
+        {`# ${channelName}`}
+      </b>
       <span className="small text-muted">
-{`${t('messages.messagesCount')} ${сountMessages}`}
-</span>
+        {`${t('messages.messagesCount')} ${сountMessages}`}
+      </span>
     </Stack>
   )
 }

@@ -9,10 +9,10 @@ export default defineConfig([
   globalIgnores(['dist', '**/dist/**', 'node_modules']),
   {
     files: ['**/*.{js,jsx}'],
+    extends: [js.configs.recommended, reactHooks.configs.flat.recommended, reactRefresh.configs.vite],
     plugins: {
       '@stylistic': stylistic,
     },
-    extends: [js.configs.recommended, reactHooks.configs.flat.recommended, reactRefresh.configs.vite],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -24,12 +24,26 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-      // ВКЛЮЧАЕМ правила как в CI, чтобы исправить код
+      '@stylistic/indent': ['error', 2],
       '@stylistic/semi': ['error', 'never'],
-      '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: false }],
-      '@stylistic/arrow-parens': ['error', 'as-needed'],
-      '@stylistic/multiline-ternary': ['error', 'always'],
-      '@stylistic/jsx-one-expression-per-line': 'error',
+      '@stylistic/brace-style': ['error', 'stroustrup'],
+      // '@stylistic/arrow-parens': ['error', 'always'],
+      '@stylistic/multiline-ternary': ['error', 'always-multiline'],
+      '@stylistic/jsx-one-expression-per-line': ['error', { allow: 'single-child' }],
+      '@stylistic/jsx-first-prop-new-line': ['error', 'multiline-multiprop'],
+      '@stylistic/jsx-max-props-per-line': ['error', { maximum: 1, when: 'multiline' }],
+      '@stylistic/jsx-closing-bracket-location': ['error', 'line-aligned'],
+      '@stylistic/jsx-closing-tag-location': ['error', 'line-aligned'],
+      '@stylistic/jsx-wrap-multilines': ['error', {
+        declaration: 'parens-new-line',
+        assignment: 'parens-new-line',
+        return: 'parens-new-line',
+        arrow: 'parens-new-line',
+        condition: 'parens-new-line',
+        logical: 'parens-new-line',
+        prop: 'parens-new-line',
+      }],
+      '@stylistic/no-trailing-spaces': ['error'],
     },
   },
 ])

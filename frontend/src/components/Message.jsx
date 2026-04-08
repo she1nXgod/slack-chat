@@ -5,10 +5,10 @@ const Message = ({ body, username }) => {
     <Row className="text-break pb-1">
       <Col>
         <b>
-{username }
-</b>
-:
-{body}
+          {username }
+        </b>
+        :
+        {body}
       </Col>
     </Row>
   )

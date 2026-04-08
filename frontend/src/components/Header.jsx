@@ -14,10 +14,12 @@ const Header = () => {
         {t('header.brand')}
       </Navbar.Brand>
       {isAuth
-? <Button onClick={() => dispatch(logout())}>
-{t('header.exit')}
-</Button>
-: null}
+        ? (
+          <Button onClick={() => dispatch(logout())}>
+            {t('header.exit')}
+          </Button>
+        )
+        : null}
     </Navbar>
   )
 }

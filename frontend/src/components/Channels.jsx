@@ -12,9 +12,11 @@ const Channels = ({ showModal }) => {
   }
 
   if (error) {
-    return <ErrorMessage>
-{t('channels.errors.errorLoadingChannels')}
-</ErrorMessage>
+    return (
+      <ErrorMessage>
+        {t('channels.errors.errorLoadingChannels')}
+      </ErrorMessage>
+    )
   }
 
   return (

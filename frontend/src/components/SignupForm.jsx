@@ -22,12 +22,14 @@ const SignupForm = () => {
       dispatch(setToken(token))
       dispatch(setUsername(name))
       navigate('/')
-    } catch (err) {
+    }
+    catch (err) {
       if (err.status === 409) {
         setErrors({ general: t('signupPage.errors.userExists') })
       }
       console.error('Signup error: ', err)
-    } finally {
+    }
+    finally {
       setSubmitting(false)
     }
   }
@@ -35,8 +37,8 @@ const SignupForm = () => {
   return (
     <Container className="p-4 border border-secondary-subtle rounded-3 shadow">
       <h2 className="h2 mb-3">
-{t('signupPage.title')}
-</h2>
+        {t('signupPage.title')}
+      </h2>
       <Formik
         initialValues={{
           username: '',
@@ -50,8 +52,8 @@ const SignupForm = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formUsername">
               <Form.Label>
-{t('signupPage.username')}
-</Form.Label>
+                {t('signupPage.username')}
+              </Form.Label>
               <Form.Control
                 type="text"
                 name="username"
@@ -62,18 +64,18 @@ const SignupForm = () => {
                 autoComplete="false"
               />
               {touched.username && errors.username
-? (
-                <div className="text-danger small">
-{errors.username}
-</div>
-              )
-: null}
+                ? (
+                  <div className="text-danger small">
+                    {errors.username}
+                  </div>
+                )
+                : null}
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formPassword">
               <Form.Label>
-{t('signupPage.password')}
-</Form.Label>
+                {t('signupPage.password')}
+              </Form.Label>
               <Form.Control
                 type="password"
                 name="password"
@@ -84,18 +86,18 @@ const SignupForm = () => {
                 autoComplete="new-password"
               />
               {touched.password && errors.password
-? (
-                <div className="text-danger small">
-{errors.password}
-</div>
-              )
-: null}
+                ? (
+                  <div className="text-danger small">
+                    {errors.password}
+                  </div>
+                )
+                : null}
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formConfirmPassword">
               <Form.Label>
-{t('signupPage.passwordConfirmation')}
-</Form.Label>
+                {t('signupPage.passwordConfirmation')}
+              </Form.Label>
               <Form.Control
                 type="password"
                 name="confirmPassword"
@@ -106,33 +108,33 @@ const SignupForm = () => {
                 autoComplete="new-password"
               />
               {touched.confirmPassword && errors.confirmPassword
-? (
-                <div className="text-danger small">
-{errors.confirmPassword}
-</div>
-              )
-: null}
+                ? (
+                  <div className="text-danger small">
+                    {errors.confirmPassword}
+                  </div>
+                )
+                : null}
             </Form.Group>
 
             {errors.general
-? (
-              <Alert variant="danger" className="p-2">
-                {errors.general}
-              </Alert>
-            )
-: null}
+              ? (
+                <Alert variant="danger" className="p-2">
+                  {errors.general}
+                </Alert>
+              )
+              : null}
 
             <Button disabled={isSubmitting} type="submit" className="w-100 mb-3">
               {isSubmitting
-? t('signupPage.signupProcess')
-: t('signupPage.signup')}
+                ? t('signupPage.signupProcess')
+                : t('signupPage.signup')}
             </Button>
             <div className="small">
-              {t('signupPage.hasAccount')} 
-{' '}
-<a href="/login">
-{t('signupPage.login')}
-</a>
+              {t('signupPage.hasAccount')}
+              {' '}
+              <a href="/login">
+                {t('signupPage.login')}
+              </a>
             </div>
           </Form>
         )}
