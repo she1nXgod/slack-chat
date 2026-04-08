@@ -45,8 +45,8 @@ export default {
       rename: 'Переименовать',
       remove: 'Удалить',
       validation: {
-        minLength: 'Минимум 3 символа',
-        maxLength: 'Максимум 20 символов',
+        minLength: 'От 3 до 20 символов',
+        maxLength: 'От 3 до 20 символов',
         required: 'Обязательное поле',
         duplicate: 'Канал с таким именем уже существует',
       },
