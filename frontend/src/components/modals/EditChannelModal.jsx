@@ -7,6 +7,7 @@ import { getChannels, editChannel } from '../../api/chatApi.js';
 import { channelSchema } from '../../schemas/index.js';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import { filterProfanity } from '../../utils/profanityFilter.js';
 
 const EditChannelModal = ({ handleClose, channelName, channelId }) => {
   const { data: channels = [] } = getChannels();
@@ -18,8 +19,11 @@ const EditChannelModal = ({ handleClose, channelName, channelId }) => {
     inputRef.current.focus();
   }, []);
 
-  const onSubmit = async (newName) => {
+  const onSubmit = async ({ name }) => {
     try {
+      const filteredName = filterProfanity(name);
+      const newName = { name: filteredName };
+
       await edit({ id: channelId, newName }).unwrap();
       toast.success(t('channels.toasts.rename'));
     } catch (err) {

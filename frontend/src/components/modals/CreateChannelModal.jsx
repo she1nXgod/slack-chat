@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { setCurrentChannel } from '../../slices/uiSlice.js';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import { filterProfanity } from '../../utils/profanityFilter.js';
 
 const CreateChannelModal = ({ handleClose }) => {
   const { data: channels = [] } = getChannels();
@@ -21,8 +22,11 @@ const CreateChannelModal = ({ handleClose }) => {
     inputRef.current.focus();
   }, []);
 
-  const onSubmit = async (newChannel) => {
+  const onSubmit = async ({ name }) => {
     try {
+      const filteredName = filterProfanity(name);
+      const newChannel = { name: filteredName };
+
       const { id } = await create(newChannel).unwrap();
 
       dispatch(setCurrentChannel(id));
