@@ -7,14 +7,14 @@ export const channelSchema = (channels, t, currentChannelName) =>
       .max(20, t('channels.validation.maxLength'))
       .required(t('channels.validation.required'))
       .test('no-repeat-channel', t('channels.validation.duplicate'), (channelName) => {
-        const channelsName = channels.map((c) => c.name)
+        const channelsName = channels.map(c => c.name)
 
         if (channelName === currentChannelName) return true
         return !channelsName.includes(channelName)
       }),
   })
 
-export const signupSchema = (t) =>
+export const signupSchema = t =>
   Yup.object().shape({
     username: Yup.string()
       .min(3, t('signupPage.validation.usernameLength'))
@@ -28,7 +28,7 @@ export const signupSchema = (t) =>
       .required(t('signupPage.validation.required')),
   })
 
-export const loginSchema = (t) =>
+export const loginSchema = t =>
   Yup.object().shape({
     username: Yup.string().required(t('loginPage.validation.required')),
     password: Yup.string().required(t('loginPage.validation.required')),

@@ -63,10 +63,10 @@ const LoginForm = () => {
               />
               {submitCount > 0 && errors.username
                 ? (
-                  <div className="text-danger small">
-                    {errors.username}
-                  </div>
-                )
+                    <div className="text-danger small">
+                      {errors.username}
+                    </div>
+                  )
                 : null}
             </Form.Group>
 
@@ -84,19 +84,19 @@ const LoginForm = () => {
               />
               {submitCount > 0 && errors.password
                 ? (
-                  <div className="text-danger small">
-                    {errors.password}
-                  </div>
+                    <div className="text-danger small">
+                      {errors.password}
+                    </div>
+                  )
+                  : null}
+              </Form.Group>
+  
+              {errors.general
+                ? (
+                  <Alert variant="danger" className="p-2">
+                    {errors.general}
+                  </Alert>
                 )
-                : null}
-            </Form.Group>
-
-            {errors.general
-              ? (
-                <Alert variant="danger" className="p-2">
-                  {errors.general}
-                </Alert>
-              )
               : null}
 
             <Button disabled={isSubmitting} type="submit" className="w-100 mb-3">

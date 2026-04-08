@@ -65,10 +65,10 @@ const SignupForm = () => {
               />
               {touched.username && errors.username
                 ? (
-                  <div className="text-danger small">
-                    {errors.username}
-                  </div>
-                )
+                    <div className="text-danger small">
+                      {errors.username}
+                    </div>
+                  )
                 : null}
             </Form.Group>
 
@@ -87,10 +87,10 @@ const SignupForm = () => {
               />
               {touched.password && errors.password
                 ? (
-                  <div className="text-danger small">
-                    {errors.password}
-                  </div>
-                )
+                    <div className="text-danger small">
+                      {errors.password}
+                    </div>
+                  )
                 : null}
             </Form.Group>
 
@@ -109,19 +109,19 @@ const SignupForm = () => {
               />
               {touched.confirmPassword && errors.confirmPassword
                 ? (
-                  <div className="text-danger small">
-                    {errors.confirmPassword}
-                  </div>
-                )
+                    <div className="text-danger small">
+                      {errors.confirmPassword}
+                    </div>
+                  )
                 : null}
             </Form.Group>
 
             {errors.general
               ? (
-                <Alert variant="danger" className="p-2">
-                  {errors.general}
-                </Alert>
-              )
+                  <Alert variant="danger" className="p-2">
+                    {errors.general}
+                  </Alert>
+                )
               : null}
 
             <Button disabled={isSubmitting} type="submit" className="w-100 mb-3">

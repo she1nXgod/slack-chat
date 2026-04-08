@@ -38,7 +38,7 @@ const MessageForm = () => {
               aria-label={t('messages.newMessage')}
               placeholder={t('messages.placeholder')}
               autoComplete="off"
-              onChange={(e) => setText(e.target.value)}
+              onChange={e => setText(e.target.value)}
             />
           </Form.Group>
         </Col>

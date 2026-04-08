@@ -15,10 +15,10 @@ const Header = () => {
       </Navbar.Brand>
       {isAuth
         ? (
-          <Button onClick={() => dispatch(logout())}>
-            {t('header.exit')}
-          </Button>
-        )
+            <Button onClick={() => dispatch(logout())}>
+              {t('header.exit')}
+            </Button>
+          )
         : null}
     </Navbar>
   )

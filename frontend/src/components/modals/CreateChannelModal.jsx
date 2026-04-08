@@ -76,10 +76,10 @@ const CreateChannelModal = ({ handleClose }) => {
               </Form.Group>
               {submitCount > 0 && errors.name
                 ? (
-                  <div className="text-danger small">
-                    {errors.name}
-                  </div>
-                )
+                    <div className="text-danger small">
+                      {errors.name}
+                    </div>
+                  )
                 : null}
             </Modal.Body>
             <Modal.Footer>
