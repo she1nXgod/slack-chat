@@ -15,7 +15,7 @@ const MessageForm = () => {
   const currentChannelId = useSelector(selectCurrentChannel)
   const { t } = useTranslation()
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     const filteredText = filterProfanity(text)
@@ -38,7 +38,7 @@ const MessageForm = () => {
               aria-label={t('messages.newMessage')}
               placeholder={t('messages.placeholder')}
               autoComplete="off"
-              onChange={e => setText(e.target.value)}
+              onChange={(e) => setText(e.target.value)}
             />
           </Form.Group>
         </Col>

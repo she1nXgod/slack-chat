@@ -1,6 +1,6 @@
 import filter from 'leo-profanity'
 
-export const filterProfanity = text => {
+export const filterProfanity = (text) => {
   if (!text) return
 
   filter.loadDictionary('ru')

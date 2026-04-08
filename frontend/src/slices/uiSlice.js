@@ -14,7 +14,7 @@ const uiSlice = createSlice({
   },
 })
 
-export const selectCurrentChannel = state => state.ui.currentChannel
+export const selectCurrentChannel = (state) => state.ui.currentChannel
 
 export const { setCurrentChannel } = uiSlice.actions
 export default uiSlice.reducer

@@ -37,13 +37,13 @@ export const chatApi = createApi({
   reducerPath: 'chatApi',
   baseQuery: customBaseQuery,
   tagTypes: ['Messages', 'Channels'],
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     getMessages: builder.query({
       query: () => 'messages',
       providesTags: ['Messages'],
       async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
-        const handleNewMessage = newMessage => {
-          updateCachedData(draft => {
+        const handleNewMessage = (newMessage) => {
+          updateCachedData((draft) => {
             draft.push(newMessage)
           })
         }
@@ -62,7 +62,7 @@ export const chatApi = createApi({
     }),
 
     sendMessage: builder.mutation({
-      query: newMessage => ({
+      query: (newMessage) => ({
         url: 'messages',
         body: newMessage,
         method: 'POST',
@@ -76,15 +76,15 @@ export const chatApi = createApi({
         arg,
         { dispatch, getState, updateCachedData, cacheDataLoaded, cacheEntryRemoved },
       ) {
-        const handleNewChannel = newChannel => {
-          updateCachedData(draft => {
+        const handleNewChannel = (newChannel) => {
+          updateCachedData((draft) => {
             draft.push(newChannel)
           })
         }
 
         const handleRemoveChannel = ({ id: channelId }) => {
-          updateCachedData(draft => {
-            return draft.filter(channel => channel.id !== channelId)
+          updateCachedData((draft) => {
+            return draft.filter((channel) => channel.id !== channelId)
           })
 
           const currentChannelId = getState().ui.currentChannel
@@ -94,8 +94,8 @@ export const chatApi = createApi({
         }
 
         const handleEditChannel = ({ id, name }) => {
-          updateCachedData(draft => {
-            return draft.map(channel => (channel.id === id
+          updateCachedData((draft) => {
+            return draft.map((channel) => (channel.id === id
               ? { ...channel, name: name }
               : channel))
           })
@@ -119,7 +119,7 @@ export const chatApi = createApi({
     }),
 
     createChannel: builder.mutation({
-      query: newChannel => ({
+      query: (newChannel) => ({
         url: 'channels',
         body: newChannel,
         method: 'POST',
@@ -127,7 +127,7 @@ export const chatApi = createApi({
     }),
 
     deleteChannel: builder.mutation({
-      query: id => ({
+      query: (id) => ({
         url: `channels/${id}`,
         method: 'DELETE',
       }),

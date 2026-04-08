@@ -8,4 +8,4 @@ const modals = {
   editChannel: EditChannelModal,
 }
 
-export default modalName => modals[modalName]
+export default (modalName) => modals[modalName]

@@ -19,13 +19,13 @@ const ChannelSidebar = () => {
   })
 
   const handleCloseModal = () => {
-    setModal(draft => {
+    setModal((draft) => {
       draft.isOpen = false
     })
   }
 
   const handleShowModal = (type, channelName = '', channelId = null) => {
-    setModal(draft => {
+    setModal((draft) => {
       draft.isOpen = true
       draft.type = type
       draft.channelId = channelId

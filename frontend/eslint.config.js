@@ -27,7 +27,7 @@ export default defineConfig([
       '@stylistic/indent': ['error', 2],
       '@stylistic/semi': ['error', 'never'],
       '@stylistic/brace-style': ['error', 'stroustrup'],
-      // '@stylistic/arrow-parens': ['error', 'always'],
+      '@stylistic/arrow-parens': ['error', 'always'],
       '@stylistic/multiline-ternary': ['error', 'always-multiline'],
       '@stylistic/jsx-one-expression-per-line': ['error', { allow: 'single-child' }],
       '@stylistic/jsx-first-prop-new-line': ['error', 'multiline-multiprop'],
