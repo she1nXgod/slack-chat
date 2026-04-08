@@ -9,5 +9,5 @@ export default configureStore({
     ui: uiReducer,
     [chatApi.reducerPath]: chatApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(chatApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(chatApi.middleware),
 })

@@ -88,11 +88,10 @@ const LoginForm = () => {
                       {errors.password}
                     </div>
                   )
-                  : null}
-              </Form.Group>
-  
-              {errors.general
-                ? (
+                : null}
+            </Form.Group>
+            {errors.general
+              ? (
                   <Alert variant="danger" className="p-2">
                     {errors.general}
                   </Alert>

@@ -83,8 +83,8 @@ export const chatApi = createApi({
         }
 
         const handleRemoveChannel = ({ id: channelId }) => {
-          updateCachedData(draft => {
-            return draft.filter((channel) => channel.id !== channelId)
+          updateCachedData((draft) => {
+            return draft.filter(channel => channel.id !== channelId)
           })
 
           const currentChannelId = getState().ui.currentChannel
