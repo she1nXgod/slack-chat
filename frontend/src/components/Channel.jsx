@@ -1,30 +1,39 @@
-import { Nav, Button, Dropdown, ButtonGroup } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentChannel, setCurrentChannel } from '../slices/uiSlice';
-import { useTranslation } from 'react-i18next';
+import { Nav, Button, Dropdown, ButtonGroup } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCurrentChannel, setCurrentChannel } from '../slices/uiSlice'
+import { useTranslation } from 'react-i18next'
 
 const Channel = ({ id, name, removable, showModal }) => {
-  const currentChannelId = useSelector(selectCurrentChannel);
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const currentChannelId = useSelector(selectCurrentChannel)
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   return (
     <Nav.Item className="w-100">
       <Dropdown as={ButtonGroup} className="w-100">
         <Button
-          variant={id === currentChannelId ? 'secondary' : 'light'}
-          className={`${id === currentChannelId ? 'active' : ''} w-100 rounded-0 text-start bg-light-gray border-0`}
+          variant={id === currentChannelId
+? 'secondary'
+: 'light'}
+          className={`${id === currentChannelId
+? 'active'
+: ''} w-100 rounded-0 text-start bg-light-gray border-0`}
           onClick={() => dispatch(setCurrentChannel(id))}
         >
           {`# ${name}`}
         </Button>
 
-        {removable ? (
+        {removable
+? (
           <>
             <Dropdown.Toggle
               split
-              variant={id === currentChannelId ? 'secondary' : 'light'}
-              className={`${id === currentChannelId ? 'active' : ''} rounded-0 bg-light-gray border-0 text-muted`}
+              variant={id === currentChannelId
+? 'secondary'
+: 'light'}
+              className={`${id === currentChannelId
+? 'active'
+: ''} rounded-0 bg-light-gray border-0 text-muted`}
             >
               {t('channels.management')}
             </Dropdown.Toggle>
@@ -35,12 +44,14 @@ const Channel = ({ id, name, removable, showModal }) => {
               <Dropdown.Item onClick={() => showModal('deleteChannel', name, id)}>
                 {t('channels.remove')}
               </Dropdown.Item>
-            </Dropdown.Menu>{' '}
+            </Dropdown.Menu>
+{' '}
           </>
-        ) : null}
+        )
+: null}
       </Dropdown>
     </Nav.Item>
-  );
-};
+  )
+}
 
-export default Channel;
+export default Channel

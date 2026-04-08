@@ -1,18 +1,20 @@
-import { Nav } from 'react-bootstrap';
-import { getChannels } from '../api/chatApi.js';
-import { Channel, ErrorMessage, LoadingSpinner } from './';
-import { useTranslation } from 'react-i18next';
+import { Nav } from 'react-bootstrap'
+import { getChannels } from '../api/chatApi.js'
+import { Channel, ErrorMessage, LoadingSpinner } from './'
+import { useTranslation } from 'react-i18next'
 
 const Channels = ({ showModal }) => {
-  const { data: channels, isLoading, error } = getChannels();
-  const { t } = useTranslation();
+  const { data: channels, isLoading, error } = getChannels()
+  const { t } = useTranslation()
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner />
   }
 
   if (error) {
-    return <ErrorMessage>{t('channels.errors.errorLoadingChannels')}</ErrorMessage>;
+    return <ErrorMessage>
+{t('channels.errors.errorLoadingChannels')}
+</ErrorMessage>
   }
 
   return (
@@ -21,7 +23,7 @@ const Channels = ({ showModal }) => {
         <Channel key={id} id={id} name={name} removable={removable} showModal={showModal} />
       ))}
     </Nav>
-  );
-};
+  )
+}
 
-export default Channels;
+export default Channels

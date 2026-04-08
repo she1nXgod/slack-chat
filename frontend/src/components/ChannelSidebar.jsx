@@ -1,14 +1,14 @@
-import { Channels, ChannelListHeader } from './';
-import getModal from './modals/index.js';
-import { Container, Row, Col } from 'react-bootstrap';
-import { useImmer } from 'use-immer';
+import { Channels, ChannelListHeader } from './'
+import getModal from './modals/index.js'
+import { Container, Row, Col } from 'react-bootstrap'
+import { useImmer } from 'use-immer'
 
 const renderModal = ({ isOpen, type, channelName, handleCloseModal, channelId }) => {
-  if (!isOpen) return;
+  if (!isOpen) return
 
-  const Modal = getModal(type);
-  return <Modal handleClose={handleCloseModal} channelName={channelName} channelId={channelId} />;
-};
+  const Modal = getModal(type)
+  return <Modal handleClose={handleCloseModal} channelName={channelName} channelId={channelId} />
+}
 
 const ChannelSidebar = () => {
   const [modal, setModal] = useImmer({
@@ -16,22 +16,22 @@ const ChannelSidebar = () => {
     type: '',
     channelId: null,
     channelName: '',
-  });
+  })
 
   const handleCloseModal = () => {
-    setModal((draft) => {
-      draft.isOpen = false;
-    });
-  };
+    setModal(draft => {
+      draft.isOpen = false
+    })
+  }
 
   const handleShowModal = (type, channelName = '', channelId = null) => {
-    setModal((draft) => {
-      draft.isOpen = true;
-      draft.type = type;
-      draft.channelId = channelId;
-      draft.channelName = channelName;
-    });
-  };
+    setModal(draft => {
+      draft.isOpen = true
+      draft.type = type
+      draft.channelId = channelId
+      draft.channelName = channelName
+    })
+  }
 
   return (
     <Container className="h-100 d-flex flex-column p-0">
@@ -53,7 +53,7 @@ const ChannelSidebar = () => {
         handleCloseModal,
       })}
     </Container>
-  );
-};
+  )
+}
 
-export default ChannelSidebar;
+export default ChannelSidebar

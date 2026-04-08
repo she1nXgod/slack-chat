@@ -3,4 +3,4 @@ export const rollbarConfig = {
   environment: import.meta.env.NODE_ENV || 'development',
   captureUncaught: true,
   captureUnhandledRejections: true,
-};
+}

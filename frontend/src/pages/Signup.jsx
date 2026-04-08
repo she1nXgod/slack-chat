@@ -1,6 +1,6 @@
-import MainLayout from '../layouts/MainLayout';
-import { SignupForm } from '../components';
-import { Row, Col } from 'react-bootstrap';
+import MainLayout from '../layouts/MainLayout'
+import { SignupForm } from '../components'
+import { Row, Col } from 'react-bootstrap'
 
 const Signup = () => {
   return (
@@ -11,7 +11,7 @@ const Signup = () => {
         </Col>
       </Row>
     </MainLayout>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup

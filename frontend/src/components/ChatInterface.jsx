@@ -1,5 +1,5 @@
-import { Container, Row, Col } from 'react-bootstrap';
-import { ChannelChat, ChannelSidebar } from './';
+import { Container, Row, Col } from 'react-bootstrap'
+import { ChannelChat, ChannelSidebar } from './'
 
 const ChatInterface = () => {
   return (
@@ -17,7 +17,7 @@ const ChatInterface = () => {
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default ChatInterface;
+export default ChatInterface

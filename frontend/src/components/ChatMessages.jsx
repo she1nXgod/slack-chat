@@ -1,29 +1,31 @@
-import { useRef, useEffect } from 'react';
-import { getMessages } from '../api/chatApi';
-import { Message, LoadingSpinner, ErrorMessage } from './';
-import { useSelector } from 'react-redux';
-import { selectCurrentChannel } from '../slices/uiSlice';
-import { useTranslation } from 'react-i18next';
+import { useRef, useEffect } from 'react'
+import { getMessages } from '../api/chatApi'
+import { Message, LoadingSpinner, ErrorMessage } from './'
+import { useSelector } from 'react-redux'
+import { selectCurrentChannel } from '../slices/uiSlice'
+import { useTranslation } from 'react-i18next'
 
 const ChatMessages = () => {
-  const { data: messages, error, isLoading } = getMessages();
-  const messagesEndRef = useRef(null);
-  const currentChannelId = useSelector(selectCurrentChannel);
-  const { t } = useTranslation();
+  const { data: messages, error, isLoading } = getMessages()
+  const messagesEndRef = useRef(null)
+  const currentChannelId = useSelector(selectCurrentChannel)
+  const { t } = useTranslation()
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, currentChannelId]);
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, currentChannelId])
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner />
   }
 
   if (error) {
-    return <ErrorMessage>{t('messages.errors.errorLoadingMessages')}</ErrorMessage>;
+    return <ErrorMessage>
+{t('messages.errors.errorLoadingMessages')}
+</ErrorMessage>
   }
 
-  const currentChannelMessages = messages.filter(({ channelId }) => channelId === currentChannelId);
+  const currentChannelMessages = messages.filter(({ channelId }) => channelId === currentChannelId)
 
   return (
     <>
@@ -32,7 +34,7 @@ const ChatMessages = () => {
       ))}
       <div ref={messagesEndRef} aria-hidden="true" />
     </>
-  );
-};
+  )
+}
 
-export default ChatMessages;
+export default ChatMessages

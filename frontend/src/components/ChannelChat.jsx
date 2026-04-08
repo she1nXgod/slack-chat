@@ -1,5 +1,5 @@
-import { Row, Col, Container } from 'react-bootstrap';
-import { ChatHeader, ChatMessages, MessageForm } from './';
+import { Row, Col, Container } from 'react-bootstrap'
+import { ChatHeader, ChatMessages, MessageForm } from './'
 
 const ChannelChat = () => {
   return (
@@ -22,7 +22,7 @@ const ChannelChat = () => {
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default ChannelChat;
+export default ChannelChat

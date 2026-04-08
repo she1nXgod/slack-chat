@@ -1,5 +1,5 @@
-import { Container } from 'react-bootstrap';
-import { Header } from '../components';
+import { Container } from 'react-bootstrap'
+import { Header } from '../components'
 
 const MainLayout = ({ children }) => {
   return (
@@ -7,7 +7,7 @@ const MainLayout = ({ children }) => {
       <Header />
       {children}
     </Container>
-  );
-};
+  )
+}
 
-export default MainLayout;
+export default MainLayout

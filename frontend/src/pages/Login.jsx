@@ -1,6 +1,6 @@
-import { Row, Col } from 'react-bootstrap';
-import MainLayout from '../layouts/MainLayout.jsx';
-import { LoginForm } from '../components';
+import { Row, Col } from 'react-bootstrap'
+import MainLayout from '../layouts/MainLayout.jsx'
+import { LoginForm } from '../components'
 
 const Login = () => {
   return (
@@ -11,7 +11,7 @@ const Login = () => {
         </Col>
       </Row>
     </MainLayout>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

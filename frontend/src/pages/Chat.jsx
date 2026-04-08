@@ -1,6 +1,6 @@
-import MainLayout from '../layouts/MainLayout.jsx';
-import { Row, Col } from 'react-bootstrap';
-import { ChatInterface } from '../components';
+import MainLayout from '../layouts/MainLayout.jsx'
+import { Row, Col } from 'react-bootstrap'
+import { ChatInterface } from '../components'
 
 const Chat = () => {
   return (
@@ -11,7 +11,7 @@ const Chat = () => {
         </Col>
       </Row>
     </MainLayout>
-  );
-};
+  )
+}
 
-export default Chat;
+export default Chat
