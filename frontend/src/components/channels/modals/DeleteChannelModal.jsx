@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
-import { deleteChannel } from '../../api/chatApi'
+import { deleteChannel } from '../../../api/chatApi'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 

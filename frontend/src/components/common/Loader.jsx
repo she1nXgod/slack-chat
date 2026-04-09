@@ -1,6 +1,6 @@
 import { Row, Spinner } from 'react-bootstrap'
 
-const LoadingSpinner = () => {
+const Loader = () => {
   return (
     <Row className="h-50 w-100 justify-content-center align-items-end overflow-hidden">
       <Spinner animation="border" role="status" />
@@ -8,4 +8,4 @@ const LoadingSpinner = () => {
   )
 }
 
-export default LoadingSpinner
+export default Loader

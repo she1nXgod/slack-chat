@@ -1,5 +1,4 @@
-import MainLayout from '../layouts/MainLayout'
-import { SignupForm } from '../components'
+import { SignupForm, MainLayout } from '../components'
 import { Row, Col } from 'react-bootstrap'
 
 const Signup = () => {

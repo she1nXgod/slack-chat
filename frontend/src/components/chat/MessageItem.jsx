@@ -1,17 +1,17 @@
 import { Row, Col } from 'react-bootstrap'
 
-const Message = ({ body, username }) => {
+const MessageItem = ({ body, username }) => {
   return (
     <Row className="text-break pb-1">
       <Col>
         <b>
-          {username }
+          {username}
         </b>
         :
-        {body}
+        {` ${body}`}
       </Col>
     </Row>
   )
 }
 
-export default Message
+export default MessageItem

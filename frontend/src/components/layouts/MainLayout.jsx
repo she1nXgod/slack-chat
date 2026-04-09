@@ -1,5 +1,5 @@
-import { Container } from 'react-bootstrap'
-import { Header } from '../components'
+import Container from 'react-bootstrap/Container'
+import { Header } from '../'
 
 const MainLayout = ({ children }) => {
   return (

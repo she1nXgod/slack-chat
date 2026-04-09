@@ -57,15 +57,9 @@
 - Automatic request retries
 
 
-## 🛠️ Infrastructure & Tools
+## 🛠️ Tools
 
-**Libraries:** 
-
-![Formik](https://img.shields.io/badge/Formik-2563eb?style=flat-square) ![Yup](https://img.shields.io/badge/Yup-2563eb?style=flat-square) ![React Toastify](https://img.shields.io/badge/React_Toastify-ffc107?style=flat-square&logoColor=black) ![i18next](https://img.shields.io/badge/i18next-009688?style=flat-square&logo=i18next&logoColor=white) ![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=flat-square&logo=socket.io)
-
-**Dev Tools:** 
-
-![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=eslint) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite)
+![Formik](https://img.shields.io/badge/Formik-2563eb?style=flat-square) ![Yup](https://img.shields.io/badge/Yup-2563eb?style=flat-square) ![React Toastify](https://img.shields.io/badge/React_Toastify-ffc107?style=flat-square&logoColor=black) ![i18next](https://img.shields.io/badge/i18next-009688?style=flat-square&logo=i18next&logoColor=white) ![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=flat-square&logo=socket.io) ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=eslint) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite)
 
 ## 🚀 Getting Started
 

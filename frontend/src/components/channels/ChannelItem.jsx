@@ -1,9 +1,9 @@
 import { Nav, Button, Dropdown, ButtonGroup } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCurrentChannel, setCurrentChannel } from '../slices/uiSlice'
+import { selectCurrentChannel, setCurrentChannel } from '../../slices/channelsSlice'
 import { useTranslation } from 'react-i18next'
 
-const Channel = ({ id, name, removable, showModal }) => {
+const ChannelItem = ({ id, name, removable, showModal }) => {
   const currentChannelId = useSelector(selectCurrentChannel)
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -33,7 +33,7 @@ const Channel = ({ id, name, removable, showModal }) => {
                     : 'light'}
                   className={`${id === currentChannelId
                     ? 'active'
-                    : ''} rounded-0 bg-light-gray border-0 text-muted`}
+                    : ''} rounded-0 bg-light-gray border-0`}
                 >
                   {t('channels.management')}
                 </Dropdown.Toggle>
@@ -54,4 +54,4 @@ const Channel = ({ id, name, removable, showModal }) => {
   )
 }
 
-export default Channel
+export default ChannelItem

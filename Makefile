@@ -1,6 +1,5 @@
 install:
-	npm ci
-	npm ci --prefix frontend
+	npm ci && npm ci --prefix frontend
 
 start:
 	npx start-server -s ./frontend/dist

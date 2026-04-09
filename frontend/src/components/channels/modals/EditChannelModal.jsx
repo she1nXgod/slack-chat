@@ -3,19 +3,16 @@ import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import { useEffect, useRef } from 'react'
 import { Formik } from 'formik'
-import { channelSchema } from '../../schemas/index.js'
-import { createChannel, getChannels } from '../../api/chatApi.js'
-import { useDispatch } from 'react-redux'
-import { setCurrentChannel } from '../../slices/uiSlice.js'
+import { getChannels, editChannel } from '../../../api/chatApi.js'
+import { channelSchema } from '../../../schemas/index.js'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
-import { filterProfanity } from '../../utils/profanityFilter.js'
+import { filterProfanity } from '../../../utils/profanityFilter.js'
 
-const CreateChannelModal = ({ handleClose }) => {
+const EditChannelModal = ({ handleClose, channelName, channelId }) => {
   const { data: channels = [] } = getChannels()
   const inputRef = useRef(null)
-  const [create] = createChannel()
-  const dispatch = useDispatch()
+  const [edit] = editChannel()
   const { t } = useTranslation()
 
   useEffect(() => {
@@ -25,16 +22,14 @@ const CreateChannelModal = ({ handleClose }) => {
   const onSubmit = async ({ name }) => {
     try {
       const filteredName = filterProfanity(name)
-      const newChannel = { name: filteredName }
+      const newName = { name: filteredName }
 
-      const { id } = await create(newChannel).unwrap()
-
-      dispatch(setCurrentChannel(id))
-      toast.success(t('channels.toasts.create'))
+      await edit({ id: channelId, newName }).unwrap()
+      toast.success(t('channels.toasts.rename'))
     }
     catch (err) {
       console.error(err.status)
-      toast.error(t('channels.toasts.errors.create'))
+      toast.error(t('channels.toasts.errors.rename'))
     }
     finally {
       handleClose()
@@ -45,20 +40,20 @@ const CreateChannelModal = ({ handleClose }) => {
     <Modal show onHide={handleClose} centered>
       <Formik
         initialValues={{
-          name: '',
+          name: channelName,
         }}
-        validationSchema={() => channelSchema(channels, t)}
+        validationSchema={() => channelSchema(channels, t, channelName)}
         onSubmit={onSubmit}
       >
         {({ handleSubmit, handleChange, handleBlur, values, errors, submitCount, isSubmitting }) => (
           <Form onSubmit={handleSubmit}>
             <Modal.Header closeButton>
               <Modal.Title>
-                {t('modals.add')}
+                {t('modals.rename')}
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form.Group className="pb-1" controlId="channelName">
+              <Form.Group className="pb-1" controlId="renameChannelName">
                 <Form.Label>
                   {t('modals.label')}
                 </Form.Label>
@@ -99,4 +94,4 @@ const CreateChannelModal = ({ handleClose }) => {
   )
 }
 
-export default CreateChannelModal
+export default EditChannelModal

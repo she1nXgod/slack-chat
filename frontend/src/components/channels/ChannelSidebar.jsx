@@ -1,4 +1,4 @@
-import { Channels, ChannelListHeader } from './'
+import { ChannelsList, ChannelHeader } from '../'
 import getModal from './modals/index.js'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useImmer } from 'use-immer'
@@ -37,12 +37,12 @@ const ChannelSidebar = () => {
     <Container className="h-100 d-flex flex-column p-0">
       <Row>
         <Col xs={12}>
-          <ChannelListHeader showModal={handleShowModal} />
+          <ChannelHeader showModal={handleShowModal} />
         </Col>
       </Row>
       <Row className="m-0 h-100 overflow-auto">
         <Col xs={12} className="p-0">
-          <Channels showModal={handleShowModal} />
+          <ChannelsList showModal={handleShowModal} />
         </Col>
       </Row>
       {renderModal({

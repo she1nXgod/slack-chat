@@ -1,7 +1,7 @@
 import Stack from 'react-bootstrap/Stack'
-import { getChannels, getMessages } from '../api/chatApi'
+import { getChannels, getMessages } from '../../api/chatApi'
 import { useSelector } from 'react-redux'
-import { selectCurrentChannel } from '../slices/uiSlice'
+import { selectCurrentChannel } from '../../slices/channelsSlice'
 import { useTranslation } from 'react-i18next'
 
 const ChatHeader = () => {

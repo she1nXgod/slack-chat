@@ -1,5 +1,5 @@
 import { Navbar, Button } from 'react-bootstrap'
-import { logout, selectCurrentToken } from '../slices/authSlice.js'
+import { logout, selectCurrentToken } from '../../slices/authSlice.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 

@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { DEFAULT_CHANNEL_ID } from '../constants'
 
 const initialState = {
-  currentChannel: '1',
+  currentChannel: DEFAULT_CHANNEL_ID,
 }
 
-const uiSlice = createSlice({
+const channelsSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
@@ -16,5 +17,5 @@ const uiSlice = createSlice({
 
 export const selectCurrentChannel = state => state.ui.currentChannel
 
-export const { setCurrentChannel } = uiSlice.actions
-export default uiSlice.reducer
+export const { setCurrentChannel } = channelsSlice.actions
+export default channelsSlice.reducer

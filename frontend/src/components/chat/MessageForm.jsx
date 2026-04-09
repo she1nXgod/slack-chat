@@ -1,11 +1,11 @@
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useRef, useState } from 'react'
-import { sendMessage } from '../api/chatApi.js'
+import { sendMessage } from '../../api/chatApi.js'
 import { useSelector } from 'react-redux'
-import { selectCurrentUsername } from '../slices/authSlice.js'
-import { selectCurrentChannel } from '../slices/uiSlice.js'
+import { selectCurrentUsername } from '../../slices/authSlice.js'
+import { selectCurrentChannel } from '../../slices/channelsSlice.js'
 import { useTranslation } from 'react-i18next'
-import { filterProfanity } from '../utils/profanityFilter.js'
+import { filterProfanity } from '../../utils/profanityFilter.js'
 
 const MessageForm = () => {
   const [text, setText] = useState('')

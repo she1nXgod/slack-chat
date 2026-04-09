@@ -1,7 +1,7 @@
 import { Row, Col, Container } from 'react-bootstrap'
-import { ChatHeader, ChatMessages, MessageForm } from './'
+import { ChatHeader, MessagesList, MessageForm } from '../'
 
-const ChannelChat = () => {
+const ChatContent = () => {
   return (
     <Container className="h-100 d-flex flex-column justify-content-between p-0">
       <Row className="g-0 shadow-b">
@@ -12,7 +12,7 @@ const ChannelChat = () => {
 
       <Row className="h-100 p-3 m-0 overflow-auto">
         <Col xs={12}>
-          <ChatMessages />
+          <MessagesList />
         </Col>
       </Row>
 
@@ -25,4 +25,4 @@ const ChannelChat = () => {
   )
 }
 
-export default ChannelChat
+export default ChatContent

@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_BASE_URL } from '../config.js'
 import { socket } from '../socket.js'
-import { setCurrentChannel } from '../slices/uiSlice.js'
+import { setCurrentChannel } from '../slices/channelsSlice.js'
 import { logout } from '../slices/authSlice.js'
 import { toast } from 'react-toastify'
+import { DEFAULT_CHANNEL_ID } from '../constants.js'
 
 const baseQuery = fetchBaseQuery({
   baseUrl: API_BASE_URL,
@@ -89,7 +90,7 @@ export const chatApi = createApi({
 
           const currentChannelId = getState().ui.currentChannel
           if (currentChannelId === channelId) {
-            dispatch(setCurrentChannel('1'))
+            dispatch(setCurrentChannel(DEFAULT_CHANNEL_ID))
           }
         }
 

@@ -1,7 +1,7 @@
 import { Row, Col, Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
-const ChannelListHeader = ({ showModal }) => {
+const ChannelHeader = ({ showModal }) => {
   const { t } = useTranslation()
 
   return (
@@ -20,4 +20,4 @@ const ChannelListHeader = ({ showModal }) => {
   )
 }
 
-export default ChannelListHeader
+export default ChannelHeader

@@ -1,13 +1,12 @@
-import MainLayout from '../layouts/MainLayout.jsx'
 import { Row, Col } from 'react-bootstrap'
-import { ChatInterface } from '../components'
+import { ChatMainView, MainLayout } from '../components'
 
 const Chat = () => {
   return (
     <MainLayout>
       <Row className="d-flex align-items-center g-0 h-100 px-4">
         <Col xs={12}>
-          <ChatInterface />
+          <ChatMainView />
         </Col>
       </Row>
     </MainLayout>

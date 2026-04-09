@@ -1,7 +1,7 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import { ChannelChat, ChannelSidebar } from './'
+import { ChatContent, ChannelSidebar } from '../'
 
-const ChatInterface = () => {
+const ChatMainView = () => {
   return (
     <Container
       style={{ height: '820px' }}
@@ -13,11 +13,11 @@ const ChatInterface = () => {
         </Col>
 
         <Col xs={9} className="p-0 h-100">
-          <ChannelChat />
+          <ChatContent />
         </Col>
       </Row>
     </Container>
   )
 }
 
-export default ChatInterface
+export default ChatMainView

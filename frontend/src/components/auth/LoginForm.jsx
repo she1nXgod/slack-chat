@@ -1,12 +1,12 @@
 import { Formik } from 'formik'
 import axios from 'axios'
-import routes from '../routes.js'
-import { setToken, setUsername } from '../slices/authSlice.js'
+import routes from '../../routes.js'
+import { setToken, setUsername } from '../../slices/authSlice.js'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Form, Button, Alert, Container } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { loginSchema } from '../schemas/index.js'
+import { loginSchema } from '../../schemas/index.js'
 
 const LoginForm = () => {
   const navigate = useNavigate()

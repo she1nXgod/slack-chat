@@ -1,6 +1,5 @@
 import { Row, Col } from 'react-bootstrap'
-import MainLayout from '../layouts/MainLayout.jsx'
-import { LoginForm } from '../components'
+import { LoginForm, MainLayout } from '../components'
 
 const Login = () => {
   return (
