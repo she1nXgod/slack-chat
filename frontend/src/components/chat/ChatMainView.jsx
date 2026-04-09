@@ -4,7 +4,7 @@ import { ChatContent, ChannelSidebar } from '../'
 const ChatMainView = () => {
   return (
     <Container
-      style={{ height: '820px' }}
+      style={{ height: 'calc(100vh - 100px)' }}
       className="border border-secondary-subtle rounded-3 shadow overflow-hidden"
     >
       <Row className="h-100">
