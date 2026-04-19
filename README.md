@@ -41,12 +41,12 @@
 - Create new chat channels
 - Rename existing channels
 - Delete channels (with permissions)
-- Browse available channels in sidebar
+- Sidebar navigation for available channels
+- User-friendly notifications
 
 ### 💬 Real-Time Messaging
 - Instant message delivery via WebSocket
 - Message history per channel
-- User-friendly notifications
 - Error handling with toast messages
 
 ### ⚡ RTK Query Integration
