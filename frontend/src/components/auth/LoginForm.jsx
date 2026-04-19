@@ -98,6 +98,7 @@ const LoginForm = () => {
                 )
               : null}
 
+            <div className='mb-3 small text-muted'>Тест данные для входа admin/admin</div>
             <Button disabled={isSubmitting} type="submit" className="w-100 mb-3">
               {isSubmitting
                 ? t('loginPage.loginProcess')
