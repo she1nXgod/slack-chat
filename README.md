@@ -67,7 +67,7 @@
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/she1nXgod/frontend-project-12
+git clone https://github.com/she1nXgod/slack-chat.git
 cd slack-chat
 make install
 ```
